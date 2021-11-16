@@ -1,0 +1,2 @@
+# RegradoCorte
+projeto pessoal.
