@@ -1,0 +1,97 @@
+{
+  "menu": [
+    {
+      "url": "dashboard",
+      "name": "Dashboard",
+      "icon": "home",
+      "slug": "home"
+    },
+    {
+        "url": "calendar",
+        "name": "Agenda",
+        "icon": "home",
+        "slug": "home"
+    },
+    {
+        "name": "Cadastros",
+        "icon": "mail",
+        "slug": "",
+        "badge": "5",
+        "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
+        "submenu": [
+            {
+                "url": "opportunity",
+                "name": "Oportunidade",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "url": "produtos",
+                "name": "Produtos",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "url": "services",
+                "name": "Serviços",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "url": "employess",
+                "name": "Funcionários",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "url": "invetary",
+                "name": "Inventario",
+                "icon": "circle",
+                "slug": "layout-full"
+            }
+        ]
+    },
+    {
+        "name": "Financeiro",
+        "icon": "money",
+        "slug": "",
+        "badge": "5",
+        "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
+        "submenu": [
+            {
+                "url": "balancy",
+                "name": "Balancete",
+                "icon": "home",
+                "slug": "home"
+            },
+            {
+                "url": "order-service",
+                "name": "Ordem de Serviço",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "name": "Nota Fiscal",
+                "icon": "money",
+                "slug": "",
+                "badge": "5",
+                "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
+                "submenu": [
+                    {
+                        "url": "nfe-create",
+                        "name": "Emitir Nfe",
+                        "icon": "home",
+                        "slug": "home"
+                    },
+                    {
+                        "url": "nfe-search",
+                        "name": "Histórico de Financeiro",
+                        "icon": "circle",
+                        "slug": "layout-full"
+                    }
+                ]
+            }
+        ]
+    }
+  ]
+}
