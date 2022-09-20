@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -11,9 +12,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function fiscal()
     {
-        return view("dashboard.index");
+        $fiscal = Auth()->user();
+        return view("dashboard.fiscal", compact('fiscal'));
     }
 
     /**

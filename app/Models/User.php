@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
+    use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
@@ -26,7 +28,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','tax_id'
     ];
 
     /**
@@ -58,4 +60,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Função responsável relacionamento entre o Time (TRARÁ SEMPRE O ULTIMO TIME ASSOCIADO.)
+     * @param 
+     * @return void
+     **/
+    public function team()
+    {
+       return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id');
+    }
 }

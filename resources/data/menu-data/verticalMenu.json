@@ -1,97 +1,156 @@
 {
   "menu": [
     {
-      "url": "dashboard",
+        "navheader": "Principal",
+        "slug": ""
+    },
+    {
+      "url": "/",
       "name": "Dashboard",
       "icon": "home",
-      "slug": "home"
+      "slug": "dashboard"
     },
     {
         "url": "calendar",
         "name": "Agenda",
-        "icon": "home",
-        "slug": "home"
+        "icon": "calendar",
+        "slug": "calendar"
     },
     {
-        "name": "Cadastros",
-        "icon": "mail",
-        "slug": "",
+        "url": "called",
+        "name": "Chamados",
+        "icon": "calendar",
+        "slug": "called"
+    },
+    {
+        "navheader": "Administração",
+        "slug": ""
+    },
+    {
+        "url": "user/list",
+        "name": "Usuários",
+        "icon": "user",
+        "slug": "user/list"
+    },
+    {
+        "url": "companys",
+        "name": "Empresas",
+        "icon": "briefcase",
+        "slug": "companys"
+    },
+    {
+        "url": "building",
+        "name": "Prédios",
+        "icon": "columns",
+        "slug": "layout-full"
+    },
+    {
+        "url": "contractors",
+        "name": "Empreiteiras",
+        "icon": "truck",
+        "slug": "contractors"
+    },
+    {
+        "url": "intervention-process",
+        "name": "Processo de Intervenção",
+        "icon": "shield",
+        "slug": "intervention-process"
+    },
+    {
+        "navheader": "Vistorias",
+        "slug": ""
+    },
+    {
+        "url": "surveys/list",
+        "name": "Listagem",
+        "class": "active",
+        "slug": "surveys/list",
+        "badgeClass": "badge rounded-pill bg-dark badge-light-danger ms-auto me-1",
+        "icon": "book-open"
+    },
+    {
+        "url": "surveys/fiscalization",
+        "name": "Fiscalização",
+        "icon": "circle",
+        "slug": "surveys/fiscalization"
+    },
+    {
+        "url": "surveys/especific",
+        "name": "Especifica",
+        "icon": "circle",
+        "slug": "layout-full"
+    },
+    {
+        "url": "surveys/st",
+        "name": "Segurança do Trabalho",
+        "icon": "circle",
+        "slug": "layout-full"
+    },
+    {
+        "url": "surveys/os-simples",
+        "name": "Orçamento Simples",
+        "icon": "circle",
+        "slug": "layout-full"
+    },
+    {
+        "url": "surveys/os-complexo",
+        "name": "Orçamento Complexo",
+        "icon": "circle",
+        "slug": "layout-full"
+    },
+    {
+        "name": "Gestão Social",
+        "icon": "circle",
+        "slug": "layout-full",
         "badge": "5",
         "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
         "submenu": [
             {
-                "url": "opportunity",
-                "name": "Oportunidade",
+                "url": "surveys/gs/beforethework",
+                "name": "Antes da Obra",
                 "icon": "circle",
                 "slug": "layout-full"
             },
             {
-                "url": "produtos",
-                "name": "Produtos",
+                "url": "surveys/gs/posthework",
+                "name": "Pós Obra",
                 "icon": "circle",
                 "slug": "layout-full"
             },
             {
-                "url": "services",
-                "name": "Serviços",
-                "icon": "circle",
-                "slug": "layout-full"
-            },
-            {
-                "url": "employess",
-                "name": "Funcionários",
-                "icon": "circle",
-                "slug": "layout-full"
-            },
-            {
-                "url": "invetary",
-                "name": "Inventario",
+                "url": "surveys/gs/afterthework",
+                "name": "Depois da Obra",
                 "icon": "circle",
                 "slug": "layout-full"
             }
         ]
     },
     {
-        "name": "Financeiro",
-        "icon": "money",
-        "slug": "",
-        "badge": "5",
-        "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
-        "submenu": [
-            {
-                "url": "balancy",
-                "name": "Balancete",
-                "icon": "home",
-                "slug": "home"
-            },
-            {
-                "url": "order-service",
-                "name": "Ordem de Serviço",
-                "icon": "circle",
-                "slug": "layout-full"
-            },
-            {
-                "name": "Nota Fiscal",
-                "icon": "money",
-                "slug": "",
-                "badge": "5",
-                "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
-                "submenu": [
-                    {
-                        "url": "nfe-create",
-                        "name": "Emitir Nfe",
-                        "icon": "home",
-                        "slug": "home"
-                    },
-                    {
-                        "url": "nfe-search",
-                        "name": "Histórico de Financeiro",
-                        "icon": "circle",
-                        "slug": "layout-full"
-                    }
-                ]
-            }
-        ]
+        "navheader": "Documentos & Relatórios",
+        "slug": ""
+    },
+    {
+        "url": "surveys/st",
+        "name": "Protocolo",
+        "icon": "circle",
+        "slug": "layout-full"
+    },
+    {
+        "url": "measurements",
+        "name": "Medições",
+        "icon": "calendar",
+        "slug": "measurements"
+    },
+    {
+        "navheader": "Armazenamento de Disco S3",
+        "slug": ""
+    },
+    {
+        "url": "file/manager",
+        "name": "File Manager",
+        "icon": "circle",
+        "slug": "layout-full"
     }
+
   ]
 }

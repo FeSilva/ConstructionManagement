@@ -45,10 +45,10 @@
                 </g>
               </g>
             </svg>
-            <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+            <h2 class="brand-text text-primary ms-1">MOSTWEB</h2>
           </a>
 
-          <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
+          <h4 class="card-title mb-1">Cadastre para iniciar.🚀</h4>
           <p class="card-text mb-2">Make your app management easy and fun!</p>
 
 
@@ -65,12 +65,25 @@
                 </span>
               @enderror
             </div>
+
             <div class="mb-1">
               <label for="register-email" class="form-label">Email</label>
               <input type="text" class="form-control @error('email') is-invalid @enderror" id="register-email"
                 name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2"
                 value="{{ old('email') }}" />
               @error('email')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+
+            <div class="mb-1">
+              <label for="register-tax_id" class="form-label">CPF/CNPJ</label>
+              <input type="text" class="form-control @error('tax_id') is-invalid @enderror" id="register-tax_id"
+                name="tax_id" placeholder="" aria-describedby="register-tax_id" tabindex="2"
+                value="{{ old('tax_id') }}" />
+              @error('tax_id')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
@@ -152,3 +165,32 @@
     </div>
   </div>
 @endsection
+@push("scripts")
+  <script type="text/javascript">
+  $("#register-tax_id").on('keypress', function(){
+    alert('dsdasdas');
+      try {
+          $("#register-tax_id").unmask();
+      } catch (e) {}
+  
+      var tamanho = $("#register-tax_id").val().length;
+  
+      if(tamanho < 11){
+          $("#register-tax_id").mask("999.999.999-99");
+      } else {
+          $("#register-tax_id").mask("99.999.999/9999-99");
+      }
+  
+      // ajustando foco
+      var elem = this;
+      setTimeout(function(){
+          // mudo a posição do seletor
+          elem.selectionStart = elem.selectionEnd = 10000;
+      }, 0);
+      // reaplico o valor para mudar o foco
+      var currentValue = $(this).val();
+      $(this).val('');
+      $(this).val(currentValue);
+  });
+  </script>
+@endpush

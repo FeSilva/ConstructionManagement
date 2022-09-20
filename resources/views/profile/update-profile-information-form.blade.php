@@ -1,6 +1,6 @@
 <x-jet-form-section submit="updateProfileInformation">
   <x-slot name="title">
-    {{ __('Profile Information') }}
+    {{ __('Informações do Perfil') }}
   </x-slot>
 
   <x-slot name="description">
@@ -31,12 +31,12 @@
         </div>
 
         <x-jet-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-          {{ __('Select A New Photo') }}
+          {{ __('Selecionar Uma Nova Foto') }}
         </x-jet-secondary-button>
 
         @if ($this->user->profile_photo_path)
           <button type="button" class="btn btn-danger text-uppercase mt-2" wire:click="deleteProfilePhoto">
-            {{ __('Remove Photo') }}
+            {{ __('Remover Foto') }}
           </button>
         @endif
 
@@ -46,7 +46,7 @@
 
     <!-- Name -->
     <div class="mb-1">
-      <x-jet-label class="form-label" for="name" value="{{ __('Name') }}" />
+      <x-jet-label class="form-label" for="name" value="{{ __('Nome Completo') }}" />
       <x-jet-input id="name" type="text" class="{{ $errors->has('name') ? 'is-invalid' : '' }}"
         wire:model.defer="state.name" autocomplete="name" />
       <x-jet-input-error for="name" />
@@ -54,10 +54,25 @@
 
     <!-- Email -->
     <div class="mb-1">
-      <x-jet-label class="form-label" for="email" value="{{ __('Email') }}" />
+      <x-jet-label class="form-label" for="email" value="{{ __('E-mail') }}" />
       <x-jet-input id="email" type="email" class="{{ $errors->has('email') ? 'is-invalid' : '' }}"
         wire:model.defer="state.email" />
       <x-jet-input-error for="email" />
+    </div>
+
+     <!-- CPF/CNPJ -->
+    <div class="mb-1">
+      <x-jet-label class="form-label" for="tax_id" value="{{ __('CPF/CNPJ') }}" />
+      <x-jet-input id="tax_id" type="tax_id" class="{{ $errors->has('tax_id') ? 'is-invalid' : '' }}"
+        wire:model.defer="state.tax_id" />
+      <x-jet-input-error for="tax_id" />
+    </div>
+       <!-- CPF/CNPJ -->
+    <div class="mb-1">
+        <x-jet-label class="form-label" for="phone" value="{{ __('Telefone') }}" />
+        <x-jet-input id="phone" type="phone" class="{{ $errors->has('phone') ? 'is-invalid' : '' }}"
+          wire:model.defer="state.phone" />
+        <x-jet-input-error for="phone" />
     </div>
   </x-slot>
 

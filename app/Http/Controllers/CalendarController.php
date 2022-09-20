@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\EmployessService;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmployessController extends Controller
+class CalendarController extends Controller
 {
-
-    private $service;
-
-    public function __construct(EmployessService $service)
-    {
-        $this->service = $service;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +14,19 @@ class EmployessController extends Controller
      */
     public function index()
     {
-        $breadcrumbs = [
-            ['link' => "javascript:void(0)", 'name' => "Listagem"]
-        ];
-        return view("employess.index", [
-            'breadcrumbs' => $breadcrumbs
-        ]);
+        return view('calendar.index');
+    }
+
+    /**
+     * Show list of company for scheduling
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function preSchedule()
+    {
+        $companys = [];
+        return view("calendar.precalendar", compact('companys'));
     }
 
     /**
@@ -37,13 +37,6 @@ class EmployessController extends Controller
     public function create()
     {
         //
-        $breadcrumbs = [
-            ['link' => "/employess", 'name' => "Listagem"],
-            ['link' => "javascript:void(0)", 'name' => "Cadastrar"]
-        ];
-        return view("employess.create", [
-            'breadcrumbs' => $breadcrumbs
-        ]);
     }
 
     /**
@@ -60,10 +53,10 @@ class EmployessController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employess\Employess  $employess
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Employess $employess)
+    public function show($id)
     {
         //
     }
@@ -71,10 +64,10 @@ class EmployessController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employess\Employess  $employess
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employess $employess)
+    public function edit($id)
     {
         //
     }
@@ -83,10 +76,10 @@ class EmployessController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employess\Employess  $employess
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employess $employess)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -94,11 +87,13 @@ class EmployessController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employess\Employess  $employess
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employess $employess)
+    public function destroy($id)
     {
         //
     }
+
+
 }

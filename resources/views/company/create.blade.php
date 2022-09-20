@@ -1,159 +1,75 @@
-@extends('layouts/contentLayoutMaster')
+@extends('layouts.app', [
+'class' => '',
+'elementActive' => 'company'
+])
 
 @section('content')
-<section id="multiple-column-form">
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Paramêtros</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Company</li>
+    </ol>
+</nav>
+<div class="content">
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
+
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Cadastro de Empresa</h4>
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Company</h3>
+                        </div>
+                        
+                    </div>
                 </div>
                 <div class="card-body">
-                    <form class="form" id="form-company">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-12 col-12">
+                    <form class="col-md-12" action="{{ route('company.store') }}" method="POST" style="overflow: auto">
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+                        <div class="row align-items-start">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="first-name-column">Razão Social</label>
-                                    <input
-                                        type="text"
-                                        id="social_reason"
-                                        class="form-control"
-                                        placeholder="Ex.: Regra do Corte Sistema de Gerenciamento LTDA."
-                                        name="social_reason"
-                                    />
+                                    <label for="exampleInputEmail1">Razão Social</label>
+                                    <input type="text" class="form-control" id="razao_social" aria-describedby="emailHelp" placeholder="Razão Social" name="razao_social">
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="last-name-column">CPF / CNPJ</label>
-                                    <input
-                                        type="text"
-                                        id="tax_id1"
-                                        class="form-control"
-                                        placeholder=""
-                                        name="tax_id1"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="last-name-column">Fantasia</label>
-                                    <input
-                                        type="text"
-                                        id="fantasy_name"
-                                        class="form-control"
-                                        placeholder="Last Name"
-                                        name="fantasy_name"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="company-column">CEP</label>
-                                    <input
-                                        type="text"
-                                        id="zipcode"
-                                        class="form-control"
-                                        name="zipcode"
-                                        placeholder="zipcode"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="complement">Complemento</label>
-                                    <input
-                                        type="text"
-                                        id="complement"
-                                        class="form-control"
-                                        name="complement"
-                                        placeholder="Email"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="city-column">Cidade</label>
-                                    <input type="text" id="city" class="form-control" placeholder="City" name="city" />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="country-floating">Estado</label>
-                                    <input
-                                        type="text"
-                                        id="country"
-                                        class="form-control"
-                                        name="country"
-                                        placeholder="Country"
-                                    />
-                                </div>
-                            </div>
 
-                            <div class="col-md-6 col-12">
+                            </div>
+                            <div class="col-md-6">
+
                                 <div class="form-group">
-                                    <label for="employess">Qtd. Funcionários</label>
-                                    <input type="number" id="employess" class="form-control" name="employess" />
+                                    <label for="exampleInputEmail1">Fantasia</label>
+                                    <input type="text" class="form-control" id="fantasia" aria-describedby="emailHelp" placeholder="Fantasia" name="fantasia">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">CNPJ</label>
+                                    <input type="text" class="form-control" id="cnpj" aria-describedby="emailHelp" placeholder="CNPJ" name="cnpj">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="annual_billing">Faturamento Anual $</label>
-                                    <input
-                                        type="number"
-                                        id="annual_billing"
-                                        class="form-control"
-                                        name="annual_billing"
-                                    />
+                                    <label for="exampleInputEmail1">Fiscal</label>
+                                    <select class="form-control" name="user_id" id="user_id">
+                                        <option>Selecione o fiscal responsável</option>
+                                        @foreach ($fiscais as $fiscal)
+                                            <option value="{{ $fiscal->id }}">{{ $fiscal->name }}</option>
+                                        @endforeach 
+                                    </select>
                                 </div>
+                                
                             </div>
-                            <!---<div class="col-md-12 col-12">
-                                <div class="form-group">
-                                    <div class="custom-control custom-control-primary custom-switch">
-                                        <p class="mb-50">Deseja realizar uma projeção futura ?</p>
-                                        <input type="checkbox" class="custom-control-input" id="future-projection-switch" />
-                                        <label class="custom-control-label" for="future-projection-switch"></label>
-                                    </div>
-                                </div>
-                            </div>--->
-                            <div class="col-md-6 col-12" style="display:none" class="future-projection">
-                                <div class="form-group">
-                                    <label for="city-column">Qtd. Funcionários</label>
-                                    <input type="number" id="employess_future" class="form-control" name="employess_future" />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12" style="display:none" class="future-projection">
-                                <div class="form-group">
-                                    <label for="country-floating">Faturamento Anual $</label>
-                                    <input
-                                        type="number"
-                                        id="annual_billing_future"
-                                        class="form-control"
-                                        name="annual_billing_future"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="button" class="btn btn-primary mr-1" onClick="store('company')">Salvar</button>
-                                <button type="reset" class="btn btn-outline-secondary">Limpar Tudo</button>
-                            </div>
+                        </div>
+                        <div class="col-4 text-right">
+                            <button type="submit" class="btn btn-sm btn-primary">Salvar</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-@endsection
-
-@section('vendor-script')
-  <!-- vendor files -->
-  <script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/extensions/polyfill.min.js')) }}"></script>
-@endsection
-@section('page-script')
-  <!-- Page js files -->
-  <script src="{{ asset(mix('js/scripts/extensions/ext-component-company.js')) }}"></script>
 @endsection

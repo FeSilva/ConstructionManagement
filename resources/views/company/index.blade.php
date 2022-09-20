@@ -1,57 +1,38 @@
 @extends('layouts/contentLayoutMaster')
-
-@section('title', 'Sua Empresa')
-
 @section('content')
-<!-- Responsive Datatable -->
-<section id="responsive-datatable">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header border-bottom">
-                    <h4 class="card-title">Empresa</h4>
-                    <a  class="btn btn-primary" href="{{ route('company.create') }}" > + Cadastrar</a>
-                </div>
-                <div class="card-datatable">
-                    <table class="dt-responsive table">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Razão Social</th>
-                            <th></th>
-                            <th>Fantasia</th>
-                            <th>CPF / CNPJ</th>
-                            <th>Cidade</th>
-                            <th>Estado</th>
-                            <th>Bairro</th>
-                            <th>Funcionários</th>
-                            <th>Satisfação do Cliente</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($companys as $company)
-                                    <td>{{ $company->company_id }}</td>
-                                    <td colspan="2">{{ $company->social_reason }}</td>
-                                    <td>{{ $company->fantasy_name }}</td>
-                                    <td>{{ $company->tax_id1 }}</td>
-                                    <td>{{ $company->city }}</td>
-                                    <td>{{ $company->country }}</td>
-                                    <td>{{ $company->complement }}</td>
-                                    <td>{{ $company->employess }}</td>
-                                    <td>5 estrelas</td>
-                                @empty
 
-                                <td colspan="8" align="center">Nenhum Registro Encontrado</td>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-datatable table-responsive">
+              <table class="datatables-permissions table">
+                <thead class="table-light">
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Razão Social</th>
+                    <th>CNPJ/CPF</th>
+                    <th>Fiscal</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+              </table>
             </div>
         </div>
     </div>
-</section>
-<!--/ Responsive Datatable -->
+</div>
+
 @endsection
 
 
+@section('vendor-script')
+  <!-- Vendor js files -->
+  <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/datatables.buttons.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.bootstrap5.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
+@endsection
 

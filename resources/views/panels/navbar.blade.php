@@ -106,20 +106,20 @@
         </span>
       </a>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-        <h6 class="dropdown-header">Manage Profile</h6>
+        <h6 class="dropdown-header">Conta</h6>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item"
           href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0)' }}">
-          <i class="me-50" data-feather="user"></i> Profile
+          <i class="me-50" data-feather="user"></i> Perfil
         </a>
         @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
           <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
-            <i class="me-50" data-feather="key"></i> API Tokens
+            <i class="me-50" data-feather="key"></i> API de Acesso
           </a>
         @endif
-        <a class="dropdown-item" href="#">
+        <!--<a class="dropdown-item" href="#">
           <i class="me-50" data-feather="settings"></i> Settings
-        </a>
+        </a>-->
 
         @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
           <div class="dropdown-divider"></div>
@@ -127,17 +127,17 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item"
             href="{{ Auth::user() ? route('teams.show', Auth::user()->currentTeam->id) : 'javascript:void(0)' }}">
-            <i class="me-50" data-feather="settings"></i> Team Settings
+            <i class="me-50" data-feather="settings"></i> Configurações do Grupo
           </a>
-          @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+         <!-- @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
             <a class="dropdown-item" href="{{ route('teams.create') }}">
               <i class="me-50" data-feather="users"></i> Create New Team
             </a>
-          @endcan
+          @endcan-->
 
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">
-            Switch Teams
+            Escolha um Grupo
           </h6>
           <div class="dropdown-divider"></div>
           @if (Auth::user())

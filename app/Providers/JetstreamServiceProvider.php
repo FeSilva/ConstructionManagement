@@ -56,12 +56,21 @@ class JetstreamServiceProvider extends ServiceProvider
             'read',
             'update',
             'delete',
-        ])->description('Administrator users can perform any action.');
+        ])->description('Administrator tem permissão para visualizar tudo no sistema.');
 
-        Jetstream::role('editor', 'Editor', [
+        Jetstream::role('employee', 'Funcionário', [
+            'read',
+            'update',
+        ])->description('Desenvolvedor tem permissão parcial no sistema.');
+
+        Jetstream::role('user', 'Usuario', [
+            'read',
+        ])->description('Usuário tem permissão para visualizar informações.');
+        
+        Jetstream::role('support', 'Support', [
             'read',
             'create',
             'update',
-        ])->description('Editor users have the ability to read, create, and update.');
+        ])->description('Suporte tem permissão nivel admin, porém algumas decisões são restritas.');
     }
 }

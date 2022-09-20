@@ -22,7 +22,14 @@ class UpdateTeamName implements UpdatesTeamNames
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'zipcode' => ['required', 'string', 'max:255'],
+            'profile_photo_path' => ['image','max:1024']
         ])->validateWithBag('updateTeamName');
+
+        if (isset($input['photo'])) {
+            $team->updateProfilePhoto($input['photo']);
+        }
 
         $team->forceFill([
             'name' => $input['name'],
