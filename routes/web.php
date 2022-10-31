@@ -7,8 +7,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ContractorsController;
-
+use App\Http\Controllers\ContractorController;
+use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\InterventionProcessController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\FileManagerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,24 +36,84 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    //Dashboard Fiscal
-    Route::get('/', [DashboardController::class, 'fiscal'])->name('dashboard.fiscal');
-
-    //Empreiteiras
-    Route::prefix('/contractors')->group(function () {
-        Route::get('/', [ContractorsController::class, 'index'])->name('contractor.list');
-    });
+    //Dashboard Gestor
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.fiscal');
 
     //Companys
     Route::prefix('/company')->group(function () {
-        Route::get('/', [CompanyController::class, 'index'])->name('company.list');
-        Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
+        Route::get('/', [CompanyController::class, 'index'])->name('companies.list');
+        Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
+        Route::get('/show/{id}', [CompanyController::class, 'show'])->name('companies.show');
+        Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('companies.edit');
+        
+        Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
+        Route::patch('/update/{id}', [CompanyController::class, 'update'])->name('companies.update');
+        Route::delete('/destroy/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
     });
+
+
+    //Prédios
+    Route::prefix('/building')->group(function () {
+        Route::get('/', [BuildingController::class, 'index'])->name('buildings.list');
+        Route::get('/create', [BuildingController::class, 'create'])->name('buildings.create');
+        Route::get('/show/{id}', [BuildingController::class, 'show'])->name('buildings.show');
+        Route::get('/edit/{id}', [BuildingController::class, 'edit'])->name('buildings.edit');
+        
+        Route::post('/store', [BuildingController::class, 'store'])->name('buildings.store');
+        Route::patch('/update/{id}', [BuildingController::class, 'update'])->name('buildings.update');
+        Route::delete('/destroy/{id}', [BuildingController::class, 'destroy'])->name('buildings.destroy');
+    });
+
+      //Prédios
+    Route::prefix('/contractors')->group(function () {
+        Route::get('/', [ContractorController::class, 'index'])->name('contractors.list');
+        Route::get('/create', [ContractorController::class, 'create'])->name('contractors.create');
+        Route::get('/show/{id}', [ContractorController::class, 'show'])->name('contractors.show');
+        Route::get('/edit/{id}', [ContractorController::class, 'edit'])->name('contractors.edit');
+        
+        Route::post('/store', [ContractorController::class, 'store'])->name('contractors.store');
+        Route::patch('/update/{id}', [ContractorController::class, 'update'])->name('contractors.update');
+        Route::delete('/destroy/{id}', [ContractorController::class, 'destroy'])->name('contractors.destroy');
+    });
+
+    //Prédios
+    Route::prefix('/intervention-process')->group(function () {
+        Route::get('/', [InterventionProcessController::class, 'index'])->name('intervention_process.list');
+        Route::get('/create', [InterventionProcessController::class, 'create'])->name('intervention_process.create');
+        Route::get('/show/{id}', [InterventionProcessController::class, 'show'])->name('intervention_process.show');
+        Route::get('/edit/{id}', [InterventionProcessController::class, 'edit'])->name('intervention_process.edit');
+        
+        Route::post('/store', [InterventionProcessController::class, 'store'])->name('intervention_process.store');
+        Route::patch('/update/{id}', [InterventionProcessController::class, 'update'])->name('intervention_process.update');
+        Route::delete('/destroy/{id}', [InterventionProcessController::class, 'destroy'])->name('intervention_process.destroy');
+    });
+
+    //Prédios
+    Route::prefix('/surveys')->group(function () {
+        Route::get('/list', [SurveyController::class, 'index'])->name('surveys.list');
+        Route::get('/show/{id}', [SurveyController::class, 'show'])->name('surveys.show');
+        Route::get('/edit/{id}', [SurveyController::class, 'edit'])->name('surveys.edit');
+        Route::post('/store', [SurveyController::class, 'store'])->name('surveys.store');
+        Route::patch('/update/{surveys_id}', [SurveyController::class, 'update'])->name('surveys.update');
+        Route::delete('/destroy/{surveys_id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
+    });
+
+    //Prédios
+    Route::prefix('/filemanager')->group(function () {
+        Route::get('/', [FileManagerController::class, 'index'])->name('filemanager.index');
+    });
+
+
+
+
 
     //Usuários
     Route::prefix('/user')->group(function () {
         Route::get('/list', [UserController::class, 'index'])->name('users.list');
+        Route::get('/view/account/{id}', [UserController::class, 'show'])->name('users.account');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
     });
+
 
     //Calendar
     Route::prefix('/calendar')->group(function () {

@@ -70,4 +70,13 @@ class User extends Authenticatable
     {
        return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id');
     }
+
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function surveys()
+    {
+        return $this->hasMany(Survey::class, 'owner_id', 'id');
+    }
+    
 }

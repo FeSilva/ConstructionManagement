@@ -3,19 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Survey;
+
+use App\Http\Services\UsersService;
 use Auth;
 
 class DashboardController extends Controller
 {
+    private $userService;
+
+    public function __construct(UsersService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function fiscal()
+    public function index()
     {
-        $fiscal = Auth()->user();
-        return view("dashboard.fiscal", compact('fiscal'));
+        $supervisor = User::whereHas("team",function($q){
+            $q->where("team_id", '=', 2);
+        })->with("surveys")->get();
+        $surveys = Survey::get();
+
+        $accomplished = $surveys->whereIn("status",['aprovado','Enviado'])->count();
+        $outstanding = $surveys->where("status", 'cadastro')->count();
+        $this->userService->jsonUserTable($this->userService->getSupervisorList($supervisor), true);
+        return view("dashboard.index",compact('accomplished', 'outstanding'));
     }
 
     /**

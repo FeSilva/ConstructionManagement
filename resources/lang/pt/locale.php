@@ -2,6 +2,12 @@
 
 return [
     "Administração" => "Administração",
+    "LO - Fiscalização" => "LO - Fiscalização",
+    "Abertura" => "Abertura",
+    "Transferência" => "Transferência",
+    "Armazenamento de Disco" => "Armazenamento de Disco",
+    "Protocolos" => "Protocolos",
+    "Relatórios" => "Relatórios",
     "Usuários" => "Usuários",
     "Listagem" => "Listagem",
     "Documentos & Relatórios" => "Documentos & Relatórios",

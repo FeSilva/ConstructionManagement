@@ -3,6 +3,7 @@
 namespace App\Models\Usuarios;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UsuariosRepository
 {
@@ -19,10 +20,12 @@ class UsuariosRepository
         foreach ($users as $key => $user)
         {
             $team = $this->currenteNameTeam($user->team, $user);
+           
             $data['data'][] = [
                 'id' => $user->id,
                 'full_name' => $user->name,
                 'email' => $user->email,
+                'observations' => $user->observations,
                 'team' => $team,
                 'avatar' => $user->profile_photo_path
             ];
@@ -37,5 +40,10 @@ class UsuariosRepository
                 $team_name = $team->name;
         }
         return $team_name;
+    }
+
+    public function find($id)
+    {
+        return $this->model->with("team")->find($id);
     }
 }

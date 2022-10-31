@@ -8,6 +8,8 @@ use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Http\Request;
 
+use App\Models\Survey;
+
 class UserController extends Controller
 {
     private $service;
@@ -15,7 +17,8 @@ class UserController extends Controller
     public function __construct(UsersService $service)
     {
         $this->service = $service;
-        app(Dispatcher::class)->dispatch($this->service->getUsersJson());
+
+        $this->service->getUsersJson();
     }
 
     /**
@@ -60,7 +63,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->service->getUserById($id);
+
+        $aSurveys = Survey::with("typesInspection")->where("owner_id", $id)->get();
+        $accomplished = $aSurveys->whereIn("status",['aprovado','Enviado'])->count();
+        $outstanding = $aSurveys->where("status", 'cadastro')->count();
+
+        $surveys = Survey::with("typesInspection")->where("owner_id", $id)->orderBy("inspection_date","desc")->paginate();
+        return view("users.account", compact("user","accomplished","outstanding","surveys"));
     }
 
     /**

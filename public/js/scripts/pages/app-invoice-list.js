@@ -27,92 +27,47 @@ $(function () {
   // datatable
   if (dtInvoiceTable.length) {
     var dtInvoice = dtInvoiceTable.DataTable({
-      ajax: assetPath + 'data/invoice-list.json', // JSON file to add data
+      ajax: assetPath + 'storage/tables/table-dashboard-list.json', // JSON file to add data
       autoWidth: false,
       columns: [
         // columns according to JSON
-        { data: 'responsive_id' },
-        { data: 'invoice_id' },
-        { data: 'invoice_status' },
-        { data: 'issued_date' },
-        { data: 'client_name' },
-        { data: 'total' },
-        { data: 'balance' },
-        { data: 'invoice_status' },
+        { data: '' },
+        { data: 'supervisor' },
+        { data: 'pendentes' },
+        { data: 'aprovado' },
+        { data: 'enviado' },
         { data: '' }
       ],
       columnDefs: [
         {
           // For Responsive
           className: 'control',
+          orderable: false,
           responsivePriority: 2,
-          targets: 0
-        },
-        {
-          // Invoice ID
-          targets: 1,
-          width: '46px',
+          targets: 0,
           render: function (data, type, full, meta) {
-            var $invoiceId = full['invoice_id'];
-            // Creates full output for row
-            var $rowOutput = '<a class="fw-bold" href="' + invoicePreview + '"> #' + $invoiceId + '</a>';
-            return $rowOutput;
-          }
-        },
-        {
-          // Invoice status
-          targets: 2,
-          width: '42px',
-          render: function (data, type, full, meta) {
-            var $invoiceStatus = full['invoice_status'],
-              $dueDate = full['due_date'],
-              $balance = full['balance'],
-              roleObj = {
-                Sent: { class: 'bg-light-secondary', icon: 'send' },
-                Paid: { class: 'bg-light-success', icon: 'check-circle' },
-                Draft: { class: 'bg-light-primary', icon: 'save' },
-                Downloaded: { class: 'bg-light-info', icon: 'arrow-down-circle' },
-                'Past Due': { class: 'bg-light-danger', icon: 'info' },
-                'Partial Payment': { class: 'bg-light-warning', icon: 'pie-chart' }
-              };
-            return (
-              "<span data-bs-toggle='tooltip' data-bs-html='true' title='<span>" +
-              $invoiceStatus +
-              '<br> <span class="fw-bold">Balance:</span> ' +
-              $balance +
-              '<br> <span class="fw-bold">Due Date:</span> ' +
-              $dueDate +
-              "</span>'>" +
-              '<div class="avatar avatar-status ' +
-              roleObj[$invoiceStatus].class +
-              '">' +
-              '<span class="avatar-content">' +
-              feather.icons[roleObj[$invoiceStatus].icon].toSvg({ class: 'avatar-icon' }) +
-              '</span>' +
-              '</div>' +
-              '</span>'
-            );
+            return '';
           }
         },
         {
           // Client name and Service
-          targets: 3,
+          targets: 1,
           responsivePriority: 4,
           width: '270px',
           render: function (data, type, full, meta) {
-            var $name = full['client_name'],
+            var $name = full['supervisor'],
               $email = full['email'],
               $image = full['avatar'],
               stateNum = Math.floor(Math.random() * 6),
               states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'],
               $state = states[stateNum],
-              $name = full['client_name'],
+              $name = full['supervisor'],
               $initials = $name.match(/\b\w/g) || [];
             $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
             if ($image) {
               // For Avatar image
               var $output =
-                '<img  src="' + assetPath + 'images/avatars/' + $image + '" alt="Avatar" width="32" height="32">';
+                '<img src="' + assetPath + 'storage/' + $image + '" alt="Avatar" height="32" width="32">';
             } else {
               // For Avatar badge
               $output = '<div class="avatar-content">' + $initials + '</div>';
@@ -142,49 +97,44 @@ $(function () {
           }
         },
         {
-          // Total Invoice Amount
+          targets: 2,
+          render: function (data, type, full, meta) {
+            var $pendentes = full['pendentes'];
+            return "<span class='text-truncate align-middle'>" + $pendentes + '</span>';
+          }
+        },
+        {
+          targets: 3,
+        },
+        {
           targets: 4,
-          width: '73px',
+        },
+        {
+          // Actions
+          targets: -1,
+          title: 'Actions',
+          orderable: false,
           render: function (data, type, full, meta) {
-            var $total = full['total'];
-            return '<span class="d-none">' + $total + '</span>$' + $total;
+            return (
+              '<div class="btn-group">' +
+              '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
+              feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
+              '</a>' +
+              '<div class="dropdown-menu dropdown-menu-end">' +
+              '<a href="' +
+              assetPath + 'user/view/account/'+ full['id'] +
+              '" class="dropdown-item">' +
+              feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
+              'Details</a>' +
+              '<a href="javascript:;" class="dropdown-item delete-record">' +
+              feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
+              'Delete</a></div>' +
+              '</div>' +
+              '</div>'
+            );
           }
-        },
-        {
-          // Due Date
-          targets: 5,
-          width: '130px',
-          render: function (data, type, full, meta) {
-            var $dueDate = new Date(full['due_date']);
-            // Creates full output for row
-            var $rowOutput =
-              '<span class="d-none">' +
-              moment($dueDate).format('YYYYMMDD') +
-              '</span>' +
-              moment($dueDate).format('DD MMM YYYY');
-            $dueDate;
-            return $rowOutput;
-          }
-        },
-        {
-          // Client Balance/Status
-          targets: 6,
-          width: '98px',
-          render: function (data, type, full, meta) {
-            var $balance = full['balance'];
-            if ($balance === 0) {
-              var $badge_class = 'badge-light-success';
-              return '<span class="badge rounded-pill ' + $badge_class + '" text-capitalized> Paid </span>';
-            } else {
-              return '<span class="d-none">' + $balance + '</span>' + $balance;
-            }
-          }
-        },
-        {
-          targets: 7,
-          visible: false
-        },
-        {
+        }
+        /*{
           // Actions
           targets: -1,
           title: 'Actions',
@@ -225,7 +175,7 @@ $(function () {
               '</div>'
             );
           }
-        }
+        }*/
       ],
       order: [[1, 'desc']],
       dom:

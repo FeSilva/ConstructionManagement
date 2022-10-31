@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\CompanyService;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
+/**
+ * Class CompanyController
+ * @package App\Http\Controllers
+ */
 class CompanyController extends Controller
 {
-
-    private $service;
-
-    public function __construct(CompanyService $service)
-    {
-        $this->service = $service;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +18,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
-      
-        
-        return view('company.index');
+        $companies = Company::with("user")->paginate();
+
+        return view('company.index', compact('companies'))
+            ->with('i', (request()->input('page', 1) - 1) * $companies->perPage());
     }
 
     /**
@@ -34,76 +31,79 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        $company = new Company();
+        return view('company.create', compact('company'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        try {
-            $this->service->store($request->all());
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
+        request()->validate(Company::$rules);
+
+        $company = Company::create($request->all());
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($id)
     {
-        //
+        $company = Company::find($id);
+
+        return view('company.show', compact('company'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($id)
     {
-        //
+        $company = Company::find($id);
+
+        return view('company.edit', compact('company'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
+     * @param  \Illuminate\Http\Request $request
+     * @param  Company $company
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Company $company)
     {
-        try {
-            $this->model->create($request->excet("_token", "employess_future", "annual_billing_future"));
-            return redirect()
-            ->back()
-            ->with('success', 'Empresa cadastrada com sucesso.');
-        } catch (\Exception $e) {
-            return redirect()
-            ->back()
-            ->with('error', $e->getMessage());
-        }
+        request()->validate(Company::$rules);
+
+        $company->update($request->all());
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        $company = Company::find($id)->delete();
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company deleted successfully');
     }
 }

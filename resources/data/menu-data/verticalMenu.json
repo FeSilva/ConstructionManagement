@@ -69,10 +69,30 @@
         "icon": "book-open"
     },
     {
-        "url": "surveys/fiscalization",
-        "name": "Fiscalização",
+        "name": "LO - Fiscalização",
         "icon": "circle",
-        "slug": "surveys/fiscalization"
+        "slug": "layout-full",
+        "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
+        "submenu": [
+            {
+                "url": "surveys/gs/beforethework",
+                "name": "Abertura",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "url": "surveys/gs/posthework",
+                "name": "Transferência",
+                "icon": "circle",
+                "slug": "layout-full"
+            },
+            {
+                "url": "surveys/gs/afterthework",
+                "name": "Fiscalização",
+                "icon": "circle",
+                "slug": "layout-full"
+            }
+        ]
     },
     {
         "url": "surveys/especific",
@@ -102,7 +122,6 @@
         "name": "Gestão Social",
         "icon": "circle",
         "slug": "layout-full",
-        "badge": "5",
         "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
         "submenu": [
             {
@@ -131,14 +150,15 @@
     },
     {
         "url": "surveys/st",
-        "name": "Protocolo",
+        "name": "Protocolos",
         "icon": "circle",
         "slug": "layout-full"
     },
     {
         "url": "measurements",
-        "name": "Medições",
-        "icon": "calendar",
+        "badge": "5",
+        "name": "Relatórios",
+        "icon": "circle",
         "slug": "measurements"
     },
     {

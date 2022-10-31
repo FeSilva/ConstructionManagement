@@ -36,7 +36,7 @@
         </thead>
       </table>
     </div>
-    <!-- Modal to add new user starts-->
+    <!-- Modal to add new user starts
     <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
       <div class="modal-dialog">
         <form class="add-new-user modal-content pt-0">
@@ -149,7 +149,7 @@
         </form>
       </div>
     </div>
-    <!-- Modal to add new user Ends-->
+     Modal to add new user Ends-->
   </div>
   <!-- list and filter end -->
 </section>

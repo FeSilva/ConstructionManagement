@@ -99,7 +99,7 @@ $(function () {
               '</div>' +
               '<div class="d-flex flex-column">' +
               '<a href="' +
-              userView +
+              assetPath + 'user/view/account/'+ full['id'] +
               '" class="user_name text-truncate text-body"><span class="fw-bolder">' +
               $name +
               '</span></a>' +
@@ -143,7 +143,7 @@ $(function () {
               '</a>' +
               '<div class="dropdown-menu dropdown-menu-end">' +
               '<a href="' +
-              userView +
+              assetPath + 'user/view/account/'+ full['id'] +
               '" class="dropdown-item">' +
               feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
               'Details</a>' +
@@ -215,17 +215,6 @@ $(function () {
             setTimeout(function () {
               $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
             }, 50);
-          }
-        },
-        {
-          text: 'Add New User',
-          className: 'add-new btn btn-primary',
-          attr: {
-            'data-bs-toggle': 'modal',
-            'data-bs-target': '#modals-slide-in'
-          },
-          init: function (api, node, config) {
-            $(node).removeClass('btn-secondary');
           }
         }
       ],
