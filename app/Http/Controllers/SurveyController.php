@@ -50,9 +50,7 @@ class SurveyController extends Controller
     public function store(Request $request)
     {
         request()->validate(Survey::$rules);
-
         $survey = Survey::create($request->all());
-
         return redirect()->route('surveys.index')
             ->with('success', 'Survey created successfully.');
     }
