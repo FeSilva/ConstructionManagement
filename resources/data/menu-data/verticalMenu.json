@@ -5,21 +5,21 @@
         "slug": ""
     },
     {
-      "url": "/",
+      "url": "#",
       "name": "Dashboard",
       "icon": "home",
       "slug": "dashboard"
     },
     {
-        "url": "calendar",
+        "url": "#",
         "name": "Agenda",
-        "icon": "calendar",
+        "icon": "lock",
         "slug": "calendar"
     },
     {
-        "url": "called",
+        "url": "#",
         "name": "Chamados",
-        "icon": "calendar",
+        "icon": "lock",
         "slug": "called"
     },
     {
@@ -33,10 +33,10 @@
         "slug": "user/list"
     },
     {
-        "url": "companys",
+        "url": "company",
         "name": "Empresas",
         "icon": "briefcase",
-        "slug": "companys"
+        "slug": "company"
     },
     {
         "url": "building",
@@ -75,19 +75,19 @@
         "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
         "submenu": [
             {
-                "url": "surveys/gs/beforethework",
+                "url": "surveys/fs/opening",
                 "name": "Abertura",
                 "icon": "circle",
                 "slug": "layout-full"
             },
             {
-                "url": "surveys/gs/posthework",
+                "url": "surveys/fs/transfer",
                 "name": "Transferência",
                 "icon": "circle",
                 "slug": "layout-full"
             },
             {
-                "url": "surveys/gs/afterthework",
+                "url": "surveys/fs/oversight",
                 "name": "Fiscalização",
                 "icon": "circle",
                 "slug": "layout-full"
@@ -95,51 +95,51 @@
         ]
     },
     {
-        "url": "surveys/especific",
+        "url": "#",
         "name": "Especifica",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full"
     },
     {
-        "url": "surveys/st",
+        "url": "#",
         "name": "Segurança do Trabalho",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full"
     },
     {
-        "url": "surveys/os-simples",
+        "url": "#",
         "name": "Orçamento Simples",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full"
     },
     {
-        "url": "surveys/os-complexo",
+        "url": "#",
         "name": "Orçamento Complexo",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full"
     },
     {
         "name": "Gestão Social",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full",
         "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
         "submenu": [
             {
-                "url": "surveys/gs/beforethework",
+                "url": "#",
                 "name": "Antes da Obra",
-                "icon": "circle",
+                "icon": "lock",
                 "slug": "layout-full"
             },
             {
-                "url": "surveys/gs/posthework",
+                "url": "#",
                 "name": "Pós Obra",
-                "icon": "circle",
+                "icon": "lock",
                 "slug": "layout-full"
             },
             {
-                "url": "surveys/gs/afterthework",
+                "url": "#",
                 "name": "Depois da Obra",
-                "icon": "circle",
+                "icon": "lock",
                 "slug": "layout-full"
             }
         ]
@@ -149,9 +149,9 @@
         "slug": ""
     },
     {
-        "url": "surveys/st",
+        "url": "#",
         "name": "Protocolos",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full"
     },
     {
@@ -162,13 +162,13 @@
         "slug": "measurements"
     },
     {
-        "navheader": "Armazenamento de Disco S3",
+        "navheader": "Armazenamento de Disco",
         "slug": ""
     },
     {
-        "url": "file/manager",
+        "url": "#",
         "name": "File Manager",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "layout-full"
     }
 

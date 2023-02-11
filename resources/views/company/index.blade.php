@@ -33,24 +33,20 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>#</th>
 										<th>Fiscal</th>
 										<th>Razao Social</th>
 										<th>Fantasia</th>
 										<th>CNPJ</th>
-                                        <th></th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($companies as $company)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
 											<td>{{ $company->user->name }}</td>
 											<td>{{ $company->razao_social }}</td>
 											<td>{{ $company->fantasia }}</td>
 											<td>{{ $company->cnpj }}</td>
-
                                             <td>
                                                 <form action="{{ route('companies.destroy',$company->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-success" href="{{ route('companies.edit',$company->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>

@@ -12,6 +12,7 @@ return [
     "Listagem" => "Listagem",
     "Documentos & Relatórios" => "Documentos & Relatórios",
     "Protocolo" => "Protocolo",
+    "Armazenamento de Disco" => "Armazenamento de Disco",
     "Principal" => "Principal",
     "Empresas" => "Empresas",
     "Configurações" => "Configurações",

@@ -1,11 +1,8 @@
-@extends('layouts.app')
-
-@section('template_title')
-    Create Intervention Process
-@endsection
+@extends('layouts/contentLayoutMaster')
+@section('title', 'Processo de Intervenção')
 
 @section('content')
-    <section class="content container-fluid">
+    <section class="container-fluid">
         <div class="row">
             <div class="col-md-12">
 
@@ -13,7 +10,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Intervention Process</span>
+                        <span class="card-title"></span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('intervention_process.store') }}"  role="form" enctype="multipart/form-data">

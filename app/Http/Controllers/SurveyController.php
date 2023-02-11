@@ -31,6 +31,47 @@ class SurveyController extends Controller
     }
 
     /**
+     * Opening Create view
+     * Função responsável por exibir a tela de criação de vistoria de Fiscalização - Abertura
+     */
+    public function opening() 
+    {
+        $survey = new Survey();
+        return view("survey.fs.opening", compact('survey'));
+    }
+
+    /**
+     * oversight Create view
+     * Função responsável por exibir a tela de criação de vistoria de Fiscalização - Fiscalização
+     */
+    public function oversight() 
+    {
+        $survey = new Survey();
+        return view("survey.fs.oversight", compact('survey'));
+    }
+
+     /**
+     * transfer Create view
+     * Função responsável por exibir a tela de criação de vistoria de Fiscalização - Fiscalização
+     */
+    public function transfer() 
+    {
+        $survey = new Survey();
+        return view("survey.fs.transfer", compact('survey'));
+    }
+
+     /**
+     * Specific Create view
+     * Função responsável por exibir a tela de criação de vistorias específicas
+     */
+    public function specific() 
+    {
+        $survey = new Survey();
+        return view("survey.specific.index", compact('survey'));
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

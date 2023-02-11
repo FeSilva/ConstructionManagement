@@ -17,7 +17,6 @@ class UserController extends Controller
     public function __construct(UsersService $service)
     {
         $this->service = $service;
-
         $this->service->getUsersJson();
     }
 
@@ -68,9 +67,9 @@ class UserController extends Controller
         $aSurveys = Survey::with("typesInspection")->where("owner_id", $id)->get();
         $accomplished = $aSurveys->whereIn("status",['aprovado','Enviado'])->count();
         $outstanding = $aSurveys->where("status", 'cadastro')->count();
-
+        $supervisors = UsersService::supervisor();
         $surveys = Survey::with("typesInspection")->where("owner_id", $id)->orderBy("inspection_date","desc")->paginate();
-        return view("users.account", compact("user","accomplished","outstanding","surveys"));
+        return view("users.account", compact("user","accomplished","outstanding","surveys","supervisors"));
     }
 
     /**

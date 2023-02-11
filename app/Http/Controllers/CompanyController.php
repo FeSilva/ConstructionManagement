@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -18,10 +19,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::with("user")->paginate();
-
-        return view('company.index', compact('companies'))
-            ->with('i', (request()->input('page', 1) - 1) * $companies->perPage());
+        $companies = Company::with("user")->paginate(15);
+ 
+        return view('company.index', compact('companies'));;
     }
 
     /**
@@ -31,8 +31,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $company = new Company();
-        return view('company.create', compact('company'));
+        $company = new Company;
+        $users = User::where('current_team_id', '2')->pluck('name','id');
+        return view('company.create', compact('company','users'));
     }
 
     /**
@@ -59,9 +60,9 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company = Company::find($id);
-
-        return view('company.show', compact('company'));
+        $company = Company::with("user")->find($id);
+        $users = User::where('current_team_id', '2')->pluck('name','id');
+        return view('company.show', compact('company','users'));
     }
 
     /**
@@ -72,9 +73,10 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = Company::find($id);
+        $company = Company::with("user")->find($id);
+        $users = User::where('current_team_id', '2')->pluck('name','id');
 
-        return view('company.edit', compact('company'));
+        return view('company.edit', compact('company','users'));
     }
 
     /**

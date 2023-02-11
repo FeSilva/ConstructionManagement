@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts/contentLayoutMaster')
 @section('template_title')
     {{ $contractor->name ?? 'Show Contractor' }}
 @endsection

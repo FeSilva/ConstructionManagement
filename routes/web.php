@@ -12,6 +12,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\InterventionProcessController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\FileManagerController;
+use App\Http\Controllers\MeansurentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,7 +89,7 @@ Route::middleware([
         Route::delete('/destroy/{id}', [InterventionProcessController::class, 'destroy'])->name('intervention_process.destroy');
     });
 
-    //Prédios
+    //vistorias
     Route::prefix('/surveys')->group(function () {
         Route::get('/list', [SurveyController::class, 'index'])->name('surveys.list');
         Route::get('/show/{id}', [SurveyController::class, 'show'])->name('surveys.show');
@@ -96,6 +97,28 @@ Route::middleware([
         Route::post('/store', [SurveyController::class, 'store'])->name('surveys.store');
         Route::patch('/update/{surveys_id}', [SurveyController::class, 'update'])->name('surveys.update');
         Route::delete('/destroy/{surveys_id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
+
+         //Vistorias específicas
+        Route::get('/specific', [SurveyController::class, 'specific'])->name('surveys.specific.create');
+        Route::post('/specific', [SurveyController::class, 'store'])->name('surveys.specific.store');
+            
+
+        Route::prefix('/fs')->group(function () {
+            Route::get('/oversight', [SurveyController::class, 'oversight'])->name('surveys.oversight.create');
+            Route::get('/opening', [SurveyController::class, 'opening'])->name('surveys.opening.create');
+            Route::get('/transfer', [SurveyController::class, 'transfer'])->name('surveys.transfer.create');
+
+            Route::post('/oversight', [SurveyController::class, 'oversightStore'])->name('surveys.oversight.store');
+            Route::post('/opening', [SurveyController::class, 'openingStore'])->name('surveys.opening.store');
+            Route::post('/transfer', [SurveyController::class, 'transferStore'])->name('surveys.transfers.store');
+        });
+
+      
+        
+
+        Route::prefix('/gs')->group(function () {
+            //Gestão Social
+        });
     });
 
     //Prédios
@@ -103,8 +126,10 @@ Route::middleware([
         Route::get('/', [FileManagerController::class, 'index'])->name('filemanager.index');
     });
 
-
-
+    ///measurements
+    Route::prefix('/measurements')->group(function () {
+        Route::get('/', [MeansurentController::class, 'index'])->name('measurements.index');
+    });
 
 
     //Usuários

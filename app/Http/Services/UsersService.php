@@ -22,6 +22,9 @@ class UsersService
         return $this->jsonUserTable($this->repository->getUserTeam());
     }
 
+    public static function supervisor() {
+        return UsuariosRepository::supervisors();
+    }
      /**
      * Função responsável pela criação do json de leitura da tabela de usuários.
      */
@@ -69,17 +72,24 @@ class UsersService
             }
         }
 
-        foreach ($fiscais as $fiscal) {
-            $return['data'][] = [
-                "id" => $fiscal['id'],
-                "email" => $fiscal['email'],
-                "avatar" => $fiscal['avatar'],
-                "supervisor" => $fiscal['supervisor'],
-                'pendentes' => $fiscal['pendentes'],
-                'aprovado' =>  $fiscal['aprovado'],
-                'enviado' => $fiscal['enviado']
-            ];
+        if(isset($fiscais)) {            
+            foreach ($fiscais as $fiscal) {
+                $return['data'][] = [
+                    "id" => $fiscal['id'],
+                    "email" => $fiscal['email'],
+                    "avatar" => $fiscal['avatar'],
+                    "supervisor" => $fiscal['supervisor'],
+                    'pendentes' => $fiscal['pendentes'],
+                    'aprovado' =>  $fiscal['aprovado'],
+                    'enviado' => $fiscal['enviado']
+                ];
+            }
+            return json_encode($return, true);
         }
+
+        $return['data'][] = [];
         return json_encode($return, true);
     }
+
+   
 }

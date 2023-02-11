@@ -1,11 +1,8 @@
-@extends('layouts.app')
-
-@section('template_title')
-    Create Contractor
-@endsection
+@extends('layouts/contentLayoutMaster')
+@section('title', 'Empreiteiras')
 
 @section('content')
-    <section class="content container-fluid">
+    <section class="container-fluid">
         <div class="row">
             <div class="col-md-12">
 

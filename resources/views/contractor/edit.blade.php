@@ -1,12 +1,9 @@
-@extends('layouts.app')
-
-@section('template_title')
-    Update Contractor
-@endsection
+@extends('layouts/contentLayoutMaster')
+@section('title', 'Empreiteiras')
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="">
+    <section class="container-fluid">
+        <div class="row">  
             <div class="col-md-12">
 
                 @includeif('partials.errors')

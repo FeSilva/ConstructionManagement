@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/buttons.bootstrap5.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/rowGroup.bootstrap5.min.css')) }}">
+
 @endsection
 
 @section('page-style')
@@ -112,6 +113,7 @@
           </div>
         </div>
         <div class="card-datatable table-responsive pt-0">
+
           <table class="surveys-user-list-table table">
             <thead class="thead">
               <tr>
@@ -120,7 +122,6 @@
                 <th>Data da Vistoria</th>
                 <th>Status</th>
                 <th>Relatório Gerado?</th>
-                <th></th>
               </tr>
           </thead>
           <tbody>
@@ -210,39 +211,53 @@
     @endif
     <!--/ User Content -->
   </div>
-
+  <div class="divider"></div>
   @if ($user->team[0]->name == 'Fiscal' || $user->team[0]->name == 'Tecnico')
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 order-1 order-md-0">
         <div class="card">
           <div class="card-header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                 <div class="float-right">
-                    <h3>Relatórios Gerados</h3>
-                  </div>
+                <div class="float-right">
+                  <h3>Relatórios Gerados</h3>
+                </div>
             </div>
+            <a href="javascript:;" class="btn btn-outline-primary" data-bs-target="#generateRelatory" data-bs-toggle="modal">
+              Gerar Relatório
+            </a>
           </div>
           <div class="card-datatable table-responsive pt-0">
             <table class="work-report-list-table table">
               <thead class="thead">
                 <tr>
                   <th>#</th>
-                
-                  <th></th>
+                  <th>Medição</th>
+                  <th>Vist. Vinculadas</th>
+                  <th>Data Inicial</th>
+                  <th>Data Final</th>
+                  <th>Ações</th>
                 </tr>
-            </thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
             </table>
           </div>
-          
         </div>
       </div>
-
- 
     </div>
   @endif
 </section>
 
 @include('users/_component/modal-edit-user')
+@include('users/_component/modal-create-medicao',['multiple' => false, 'block' => true])
 @include('content/_partials/_modals/modal-upgrade-plan')
 @endsection
 
@@ -274,4 +289,5 @@
   <script src="{{ asset(mix('js/scripts/pages/modal-edit-user.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/pages/app-user-view-account.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/pages/app-user-view.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
 @endsection

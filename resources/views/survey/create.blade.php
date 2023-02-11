@@ -1,11 +1,9 @@
-@extends('layouts.app')
+@extends('layouts/contentLayoutMaster')
 
-@section('template_title')
-    Create Survey
-@endsection
-
+@section('title', 'Vistorias Específicas')
 @section('content')
-    <section class="content container-fluid">
+
+    <section class="container-fluid">
         <div class="row">
             <div class="col-md-12">
 

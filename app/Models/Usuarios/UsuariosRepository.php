@@ -11,12 +11,12 @@ class UsuariosRepository
 
     public function __construct(User $model)
     {
-        $this->model = $model;
+        //$this->model = $model;
     }
 
     public function getUserTeam()
     {
-        $users = $this->model->with("team")->get();
+        $users = User::with("team")->get();
         foreach ($users as $key => $user)
         {
             $team = $this->currenteNameTeam($user->team, $user);
@@ -33,6 +33,12 @@ class UsuariosRepository
         return json_encode($data, true);
     }
 
+    public static function supervisors()
+    {
+        return User::whereHas("team", function ($query){
+            $query->where('teams.id', 2); //id = 2 / Grupo = fiscal
+        })->pluck('name','id');
+    }
     private function currenteNameTeam($teams, $user)
     {
         foreach($teams as $team) {
@@ -44,6 +50,6 @@ class UsuariosRepository
 
     public function find($id)
     {
-        return $this->model->with("team")->find($id);
+        return User::with("team")->find($id);
     }
 }
