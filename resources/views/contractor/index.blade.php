@@ -39,14 +39,10 @@
                                     @foreach ($contractors as $contractor)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
 											<td>{{ $contractor->fantasy_name }}</td>
 											<td>{{ $contractor->tax_id }}</td>
-										
 											<td>{{ $contractor->email }}</td>
 											<td>{{ $contractor->contact_name }}</td>
-							
-
                                             <td>
                                                 <form action="{{ route('contractors.destroy',$contractor->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-success" href="{{ route('contractors.edit',$contractor->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>

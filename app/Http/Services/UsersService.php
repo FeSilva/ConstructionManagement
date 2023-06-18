@@ -32,8 +32,8 @@ class UsersService
     {
         try{
             if ($dash)
-                return Storage::disk('public')->put("/tables/table-dashboard-list.json", $json);
-            return Storage::disk('public')->put("/tables/table-users-list.json", $json);
+                return Storage::disk('public')->put("tables/table-dashboard-list.json", $json);
+            return Storage::disk('public')->put("tables/table-users-list.json", $json);
         }catch (\Exception $e) {
             dd($e->getMessage());
         }

@@ -41,6 +41,7 @@ class UsuariosRepository
     }
     private function currenteNameTeam($teams, $user)
     {
+        $team_name = null;
         foreach($teams as $team) {
             if ($team->id == $user->current_team_id)
                 $team_name = $team->name;

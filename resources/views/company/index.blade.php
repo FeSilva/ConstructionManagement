@@ -35,7 +35,6 @@
                                     <tr>
 										<th>Fiscal</th>
 										<th>Razao Social</th>
-										<th>Fantasia</th>
 										<th>CNPJ</th>
                                         <th>Ações</th>
                                     </tr>
@@ -45,7 +44,6 @@
                                         <tr>
 											<td>{{ $company->user->name }}</td>
 											<td>{{ $company->razao_social }}</td>
-											<td>{{ $company->fantasia }}</td>
 											<td>{{ $company->cnpj }}</td>
                                             <td>
                                                 <form action="{{ route('companies.destroy',$company->id) }}" method="POST">

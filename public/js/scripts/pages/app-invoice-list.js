@@ -55,6 +55,7 @@ $(function () {
           responsivePriority: 4,
           width: '270px',
           render: function (data, type, full, meta) {
+            console.log(full);
             var $name = full['supervisor'],
               $email = full['email'],
               $image = full['avatar'],

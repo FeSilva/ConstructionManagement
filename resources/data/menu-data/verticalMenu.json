@@ -145,6 +145,17 @@
         ]
     },
     {
+        "navheader": "Lista de Envio",
+        "slug": ""
+    },
+    {
+        "url": "shippinglist",
+        "badge": "5",
+        "name": "Lista de Envio",
+        "icon": "send",
+        "slug": "shippinglist"
+    },
+    {
         "navheader": "Documentos & Relatórios",
         "slug": ""
     },

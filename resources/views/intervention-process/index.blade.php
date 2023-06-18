@@ -46,7 +46,7 @@
                                             
 											<td>{{ $interventionProcess->contractor->fantasy_name }}</td>
 											<td>{{ $interventionProcess->building->name }}</td>
-											<td>{{ $interventionProcess->total_price }}</td>
+											<td>R$ {{ $interventionProcess->total_price }}</td>
 											<td>{{ $interventionProcess->total_term }}</td>
 											<td>{{ $interventionProcess->pi_object }}</td>
 											<td>{{ date("d/m/Y", strtotime($interventionProcess->signature_date)) }}</td>

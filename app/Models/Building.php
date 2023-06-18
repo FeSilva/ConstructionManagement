@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Building extends Model
 {
-    protected $table = "Building";
+    protected $table = "building";
     static $rules = [
 		'user_id' => 'required',
 		'codigo' => 'required',

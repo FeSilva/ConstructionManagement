@@ -52,10 +52,10 @@ $(function () {
             text: 'Módulo ainda não está finalizado, desculpe o inconviente',
             icon: 'info',
             customClass: {
-              confirmButton: 'btn btn-primary'
+                confirmButton: 'btn btn-primary'
             },
             buttonsStyling: false
-          })
+        })
     })
   }
 
