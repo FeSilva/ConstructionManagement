@@ -4,7 +4,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Código PI') }}
-                    {{ Form::text('intervention_code', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('intervention_code') ? ' is-invalid' : ''), 'placeholder' => 'Código PI']) }}
+                    {{ Form::text('intervention_code', old('intervention_code'), ['class' => 'form-control' . ($errors->has('intervention_code') ? ' is-invalid' : ''), 'id' => 'intervention_code','placeholder' => 'Código PI']) }}
                     {!! $errors->first('intervention_code', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -12,7 +12,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Nome Prédio') }}
-                    {{ Form::text('building_id', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'placeholder' => 'Nome do Prédio']) }}
+                    {{ Form::text('building_id', old('building_id'), ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), "readonly" => true, 'id' => 'building_id','placeholder' => 'Nome do Prédio']) }}
                     {!! $errors->first('building_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -20,7 +20,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Diretoria') }}
-                    {{ Form::text('diretory', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'placeholder' => 'Diretoria']) }}
+                    {{ Form::text('diretory', old('diretor'), ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), "readonly" => true,'id' => 'diretory','placeholder' => 'Diretoria']) }}
                     {!! $errors->first('diretory', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -30,8 +30,8 @@
             <div class="col-md-12 mb-2">
                 <div class="form-group">
                     {{ Form::label('Tipo vistoria') }}
-                    {{ Form::select('type_id', [], old(""), ['class' => 'form-control select' . ($errors->has('type_id') ? ' is-invalid' : ''), 'placeholder' => 'Abertura']) }}
-                    {!! $errors->first('type_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::text('type_name', "Abertura", ['class' => 'form-control select' . ($errors->has('type_name') ? ' is-invalid' : ''),  'placeholder' => 'Abertura']) }}
+                    {!! $errors->first('type_name', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
@@ -40,26 +40,19 @@
             <div class="col-md-6 mb-2">
                 <div class="form-group">
                     {{ Form::label('Data de Abertura') }}
-                    {{ Form::date('date_close', $survey->date_close, ['class' => 'form-control' . ($errors->has('date_close') ? ' is-invalid' : ''), 'placeholder' => 'Date Close']) }}
-                    {!! $errors->first('date_close', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::date('inspection_date', old('inspection_date'), ['class' => 'form-control' . ($errors->has('inspection_date') ? ' is-invalid' : ''), 'placeholder' => 'inspection_date']) }}
+                    {!! $errors->first('inspection_date', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-md-6 mb-2">
                 <div class="form-group">
                     {{ Form::label('Arquivo') }}
-                    {{ Form::file('', $attributes = array('url' => 'foo/bar', 'files' => true, 'class' => 'form-control' . ($errors->has('date_close') ? ' is-invalid' : ''))) }}
+                    {{ Form::file('file_archive', $attributes = array('url' => 'foo/bar', 'files' => true, 'class' => 'form-control' . ($errors->has('date_close') ? ' is-invalid' : ''))) }}
                     {!! $errors->first('archive', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
-
         <!--
-
-        <div class="form-group">
-            {{ Form::label('type_id') }}
-            {{ Form::text('type_id', $survey->type_id, ['class' => 'form-control' . ($errors->has('type_id') ? ' is-invalid' : ''), 'placeholder' => 'Type Id']) }}
-            {!! $errors->first('type_id', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
         <div class="form-group">
             {{ Form::label('subtype_id') }}
             {{ Form::text('subtype_id', $survey->subtype_id, ['class' => 'form-control' . ($errors->has('subtype_id') ? ' is-invalid' : ''), 'placeholder' => 'Subtype Id']) }}
@@ -138,7 +131,7 @@
         </div>-->
 
     </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+    <div class="col-md-12 box-footer mt20">
+        <button type="submit" class="btn btn-primary" style="width: 100%">Cadastrar Vistoria</button>
     </div>
 </div>

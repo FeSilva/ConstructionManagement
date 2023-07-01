@@ -36,7 +36,7 @@ $configData = Helper::applClasses();
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
         <h2 class="card-title fw-bold mb-1">EDUCASP</h2>
-        <p class="card-text mb-2"><small>FUNDAÇÃO PARA O DESENVOLVIMENTO DA EDUÇÃO</small></p>
+        <p class="card-text mb-2"><small>FUNDAÇÃO PARA O DESENVOLVIMENTO DA EDUCAÇÃO</small></p>
         <form class="auth-login-form mt-2" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-1">

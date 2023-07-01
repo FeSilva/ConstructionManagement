@@ -151,7 +151,7 @@
     {
         "url": "shippinglist",
         "badge": "5",
-        "name": "Lista de Envio",
+        "name": "Enviar Vistorias",
         "icon": "send",
         "slug": "shippinglist"
     },

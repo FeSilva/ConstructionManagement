@@ -4,7 +4,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Código PI') }}
-                    {{ Form::text('intervention_code', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('intervention_code') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('intervention_code', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('intervention_code') ? ' is-invalid' : ''),'id'=>'intervention_code', 'placeholder' => '']) }}
                     {!! $errors->first('intervention_code', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -12,7 +12,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Nome Prédio') }}
-                    {{ Form::text('building_id', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('building_id', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'id'=>'building_id','placeholder' => '' ,'readonly' => true]) }}
                     {!! $errors->first('building_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -20,7 +20,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Diretoria') }}
-                    {{ Form::text('diretory', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('diretory', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'id'=>'diretory', 'placeholder' => '', 'readonly' => true]) }}
                     {!! $errors->first('diretory', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -30,71 +30,67 @@
             <div class="col-md-12 mb-2">
                 <div class="form-group">
                     {{ Form::label('Tipo vistoria') }}
-                    {{ Form::select('type_id', [], old(""), ['class' => 'form-control select' . ($errors->has('type_id') ? ' is-invalid' : ''), 'placeholder' => 'Transferência']) }}
+                    {{ Form::text('type_name', "Transferência", ['class' => 'form-control select' . ($errors->has('type_name') ? ' is-invalid' : ''),  'placeholder' => 'Transferência', 'readonly' => true]) }}
                     {!! $errors->first('type_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
 
+      
         <div class="row">
             <div class="col-md-4 mb-2">
                 <div class="form-group">
                     {{ Form::label('Data do LO') }}
-                    {{ Form::date('inspection_date', $survey->inspection_date, ['class' => 'form-control' . ($errors->has('inspection_date') ? ' is-invalid' : ''), 'placeholder' => 'Inspection Date']) }}
+                    {{ Form::date('inspection_date', $survey->inspection_date, ['class' => 'form-control' . ($errors->has('inspection_date') ? ' is-invalid' : ''), 'id'=>'inspection_date','placeholder' => 'Inspection Date']) }}
                     {!! $errors->first('inspection_date', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-            <div class="col-md-8 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="form-group">
-                    {{ Form::label('Arquivo do LO') }}
-                    {{ Form::file('', $attributes = array('url' => 'foo/bar', 'files' => true, 'class' => 'form-control' . ($errors->has('date_close') ? ' is-invalid' : ''))) }}
-                    {!! $errors->first('archive', '<div class="invalid-feedback">:message</div>') !!}
+                    {{ Form::label('Previsão de Término') }}
+                    {{ Form::date('date_close', $survey->date_close, ['class' => 'form-control' . ($errors->has('date_close') ? ' is-invalid' : ''), 'id'=>'date_close','placeholder' => 'Date Close']) }}
+                    {!! $errors->first('date_close', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <div class="form-group">
+                    {{ Form::label('Nº Funcionários') }}
+                    {{ Form::number('employess', $survey->employess, ['class' => 'form-control' . ($errors->has('employess') ? ' is-invalid' : ''), 'id'=>'employess','placeholder' => '']) }}
+                    {!! $errors->first('employess', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-3 mb-2">
-                <div class="form-group">
-                    {{ Form::label('Nº Funcionários') }}
-                    {{ Form::number('employess', $survey->employess, ['class' => 'form-control' . ($errors->has('employess') ? ' is-invalid' : ''), 'placeholder' => '']) }}
-                    {!! $errors->first('employess', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
+          
 
-            <div class="col-md-3 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="form-group">
                     {{ Form::label('% Atual Global') }}
-                    {{ Form::text('type_id', $survey->type_id, ['class' => 'form-control' . ($errors->has('type_id') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('physical_progress', $survey->type_id, ['class' => 'form-control' . ($errors->has('type_id') ? ' is-invalid' : ''), 'id'=>'building_id','placeholder' => '']) }}
                     {!! $errors->first('type_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
       
-            <div class="col-md-3 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="form-group">
                     {{ Form::label('Andamento') }}
-                    {{ Form::select('progress_id', [], old(''), ['class' => 'form-control' . ($errors->has('progress_id') ? ' is-invalid' : ''), 'placeholder' => 'Em execução']) }}
+                    {{ Form::select('progress_id', [1 => 'normal'], old(''), ['class' => 'form-control' . ($errors->has('progress_id') ? ' is-invalid' : ''), 'placeholder' => 'Em execução']) }}
                     {!! $errors->first('progress_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
 
-            <div class="col-md-3 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="form-group">
                     {{ Form::label('Ritmo') }}
-                    {{ Form::select('rhythms_id', [], old(''), ['class' => 'form-control' . ($errors->has('rhythms_id') ? ' is-invalid' : ''), 'placeholder' => 'Normal']) }}
+                    {{ Form::select('rhythms_id', [1 => 'normal'], old(''), ['class' => 'form-control' . ($errors->has('rhythms_id') ? ' is-invalid' : ''), 'placeholder' => 'Normal']) }}
                     {!! $errors->first('rhythms_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-3 mb-2">
-                <div class="form-group">
-                    {{ Form::label('Previsão de Término') }}
-                    {{ Form::date('date_close', $survey->date_close, ['class' => 'form-control' . ($errors->has('date_close') ? ' is-invalid' : ''), 'placeholder' => 'Date Close']) }}
-                    {!! $errors->first('date_close', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
+            
         </div>
 
         <!--
@@ -182,7 +178,7 @@
         </div>-->
 
     </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+    <div class="col-md-12 box-footer mt20">
+        <button type="submit" class="btn btn-primary" style="width: 100%">Cadastrar Vistoria</button>
     </div>
 </div>

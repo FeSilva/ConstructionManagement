@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Survey;
 use Illuminate\Http\Request;
-
+use App\Services\SurveyServices;
+use Illuminate\Support\Facades\Storage;
 /**
  * Class SurveyController
  * @package App\Http\Controllers
  */
 class SurveyController extends Controller
 {
+    protected $service;
+    public function __construct() {
+        $this->service = new SurveyServices();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -90,10 +96,14 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Survey::$rules);
-        $survey = Survey::create($request->all());
-        return redirect()->route('surveys.index')
-            ->with('success', 'Survey created successfully.');
+        try {
+            $request->flash();
+            $create = $this->service->store($request->except("_token"), $request->file("file_archive"));
+            return redirect()->back()
+                ->with('success', 'Vistoria Cadastrada com Sucesso.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with("error", $e->getMessage());
+        }
     }
 
     /**
@@ -150,5 +160,16 @@ class SurveyController extends Controller
 
         return redirect()->route('surveys.index')
             ->with('success', 'Survey deleted successfully');
+    }
+
+    public function load_intervention(Request $request) {
+        try { 
+            $interventionProcess = $this->service->load_intervention($request->post("intervention_code"));
+            return response()->json($interventionProcess, 200);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            return redirect()->back()
+            ->with('success', 'Survey Error:'. $e->getMessage());
+        }
     }
 }

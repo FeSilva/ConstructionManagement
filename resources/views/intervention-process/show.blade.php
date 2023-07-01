@@ -14,7 +14,7 @@
                             <span class="card-title">Show Intervention Process</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('intervention_process.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('intervention_process.list') }}"> Back</a>
                         </div>
                     </div>
 

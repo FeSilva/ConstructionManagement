@@ -94,27 +94,36 @@ Route::middleware([
         Route::get('/list', [SurveyController::class, 'index'])->name('surveys.list');
         Route::get('/show/{id}', [SurveyController::class, 'show'])->name('surveys.show');
         Route::get('/edit/{id}', [SurveyController::class, 'edit'])->name('surveys.edit');
-        Route::post('/store', [SurveyController::class, 'store'])->name('surveys.store');
+        //Route::post('/store', [SurveyController::class, 'store'])->name('surveys.store');
         Route::patch('/update/{surveys_id}', [SurveyController::class, 'update'])->name('surveys.update');
         Route::delete('/destroy/{surveys_id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
-
-         //Vistorias específicas
         Route::get('/specific', [SurveyController::class, 'specific'])->name('surveys.specific.create');
         Route::post('/specific', [SurveyController::class, 'store'])->name('surveys.specific.store');
-            
 
         Route::prefix('/fs')->group(function () {
-            Route::get('/oversight', [SurveyController::class, 'oversight'])->name('surveys.oversight.create');
-            Route::get('/opening', [SurveyController::class, 'opening'])->name('surveys.opening.create');
-            Route::get('/transfer', [SurveyController::class, 'transfer'])->name('surveys.transfer.create');
+            Route::prefix('/opening')->group(function () {
+                Route::get('/', [SurveyController::class, 'opening'])->name('surveys.opening.create');
+                Route::post('/store', [SurveyController::class, 'store'])->name('surveys.opening.store');
+                Route::post('/load/pi', [SurveyController::class, 'load_intervention'])->name('surveys.opening.load.pi');
+            });
 
-            Route::post('/oversight', [SurveyController::class, 'oversightStore'])->name('surveys.oversight.store');
-            Route::post('/opening', [SurveyController::class, 'openingStore'])->name('surveys.opening.store');
-            Route::post('/transfer', [SurveyController::class, 'transferStore'])->name('surveys.transfers.store');
+            Route::prefix('/transfer')->group(function (){
+                Route::get('/', [SurveyController::class, 'transfer'])->name('surveys.transfer.create');
+                Route::post('/store', [SurveyController::class, 'store'])->name('surveys.transfer.store');
+            });
+
+            Route::prefix("/oversight")->group(function () {
+                Route::get('/', [SurveyController::class, 'oversight'])->name('surveys.oversight.create');
+                Route::post('/store', [SurveyController::class, 'store'])->name('surveys.oversight.store');
+
+
+            });
+         
+
+            //Route::post('/oversight', [SurveyController::class, 'oversightStore'])->name('surveys.oversight.store');
+           // Route::post('/opening', [SurveyController::class, 'openingStore'])->name('surveys.opening.store');
+            //\Route::post('/transfer', [SurveyController::class, 'transferStore'])->name('surveys.transfers.store');
         });
-
-      
-        
 
         Route::prefix('/gs')->group(function () {
             //Gestão Social

@@ -55,7 +55,24 @@ class Survey extends Model
      *
      * @var array
      */
-    protected $fillable = ['intervention_id','type_id','subtype_id','progress_id','owner_id','rhythms_id','program','intervention_code','building_code','date_close','inspection_date','budget_number','archive','name_archive','employess','status','physical_progress','merge'];
+    protected $fillable = [
+        'intervention_id',
+        'type_id',
+        'progress_id',
+        'owner_id',
+        'rhythms_id',
+        'program',
+        'intervention_code',
+        'building_code',
+        'date_close',
+        'inspection_date',
+        'budget_number',
+        'archive',
+        'name_archive',
+        'employess',
+        'status',
+        'physical_progress',
+        'merge'];
 
 
     /**

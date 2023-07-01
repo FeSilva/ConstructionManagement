@@ -68,6 +68,15 @@ class InterventionProcess extends Model
     {
         return $this->hasOne('App\Models\Building', 'id', 'building_id');
     }
+
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function Items()
+    {
+        return $this->hasMany('App\Models\ItemsPi', 'intervention_id', 'id');
+    }
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
