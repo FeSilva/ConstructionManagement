@@ -54,6 +54,7 @@ return array(
     'App\\Models\\Company' => $baseDir . '/app/Models/Company.php',
     'App\\Models\\Contractor' => $baseDir . '/app/Models/Contractor.php',
     'App\\Models\\InterventionProcess' => $baseDir . '/app/Models/InterventionProcess.php',
+    'App\\Models\\ItemsPi' => $baseDir . '/app/Models/ItemsPi.php',
     'App\\Models\\Meansurent' => $baseDir . '/app/Models/Meansurent.php',
     'App\\Models\\Membership' => $baseDir . '/app/Models/Membership.php',
     'App\\Models\\Rhythms' => $baseDir . '/app/Models/Rhythms.php',

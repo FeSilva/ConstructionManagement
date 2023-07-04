@@ -13,7 +13,7 @@
                         <form method="POST" action=""  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('survey.specific.specificForm')
+                            @include('survey.gs.gsForm')
 
                         </form>
                     </div>

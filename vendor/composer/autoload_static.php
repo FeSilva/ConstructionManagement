@@ -658,6 +658,7 @@ class ComposerStaticInitff31a41e49b74dc0f8db49fc8977814c
         'App\\Models\\Company' => __DIR__ . '/../..' . '/app/Models/Company.php',
         'App\\Models\\Contractor' => __DIR__ . '/../..' . '/app/Models/Contractor.php',
         'App\\Models\\InterventionProcess' => __DIR__ . '/../..' . '/app/Models/InterventionProcess.php',
+        'App\\Models\\ItemsPi' => __DIR__ . '/../..' . '/app/Models/ItemsPi.php',
         'App\\Models\\Meansurent' => __DIR__ . '/../..' . '/app/Models/Meansurent.php',
         'App\\Models\\Membership' => __DIR__ . '/../..' . '/app/Models/Membership.php',
         'App\\Models\\Rhythms' => __DIR__ . '/../..' . '/app/Models/Rhythms.php',

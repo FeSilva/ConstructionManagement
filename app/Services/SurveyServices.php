@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\Models\InterventionProcess;
 use App\Models\TypesInspection;
+use App\Models\SurveyItemProgress;
 use App\Models\Survey;
+
+use App\Models\surveys\repository;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
@@ -12,11 +15,14 @@ use Illuminate\Support\Carbon;
 
 Class SurveyServices {
 
-    public function __construct() {
-
+    protected $repository;
+    public function __construct(repository $repository) {
+        $this->repository = $repository;
     }
 
     public function store($request, $file) {
+
+        dd($request['']);
         $interventionProcess = InterventionProcess::where("code", $request["intervention_code"])->with("building")->with("user")->first();
         $inspectionType = TypesInspection::where("name", $request["type_name"])->first();
         switch ($inspectionType->id) {
@@ -34,6 +40,7 @@ Class SurveyServices {
         }
         $array = [
             'type_id' => $inspectionType->id,
+            'intervention_id'=> $interventionProcess->id,
             "progress_id" => $progress,
             "owner_id" => $interventionProcess->user->id,
             "intervention_code" => $request["intervention_code"],
@@ -52,10 +59,28 @@ Class SurveyServices {
                 return new Exception("Já existe uma vistoria de $inspectionType->name para este código, e deve existir apenas uma.");
             }
         }
-        Survey::create($array);
+        $items = SurveyItemProgress::where("intervention_id", $interventionProcess->id)->get();
+        foreach($items as $item) {
+            if($request["item_$item->id"]){
+                $itemId = $item->id;
+            }
+        }
+        $survey = Survey::create($array);
+        SurveyItemProgress::create([
+            'pi_id' => $interventionProcess->id,
+            'item_id' => $itemId,
+            'vistoria_id' => $survey->id,
+            'date_vistoria' => $survey->inspection_date,
+            'progress' => str_replace(',', '.', $request["item_$itemId"]),
+            'created_at' => now()
+        ]);
         return true;
     }
 
+
+    public function getSurveysJson() {
+        return $this->jsonSurveyTable($this->repository->getSurveys());
+    }
 
     public function uploadFile($file, $info) {
         $intervention = InterventionProcess::where("code", $info["intervention_code"])->with("user")->first();
@@ -69,13 +94,21 @@ Class SurveyServices {
         $fileName = 'LO_' . $codigoPi . '_' . $date . '_' . $intervention->user->cod_user_fde . '.pdf';
         return "{$fileName}";
     }
-
+    private function jsonSurveyTable($json) {
+        try{
+            return Storage::disk('public')->put("tables/table-surveys-list.json", $json);
+        }catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+    
     public function load_intervention($interventionCode) {
         $interventionProcess = InterventionProcess::with("contractor")
         ->with("surveys")
         ->with("user")
         ->with('building')
         ->with("Items")
+        ->with("Items.SurveyItemProgress")
         ->where("code", $interventionCode)
         ->first();
         return $interventionProcess;

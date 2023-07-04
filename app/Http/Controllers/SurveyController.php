@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Storage;
 class SurveyController extends Controller
 {
     protected $service;
-    public function __construct() {
-        $this->service = new SurveyServices();
+    public function __construct(SurveyServices $service) {
+        $this->service = $service;
+        $this->service->getSurveysJson();
     }
     /**
      * Display a listing of the resource.
@@ -76,6 +77,16 @@ class SurveyController extends Controller
         return view("survey.specific.index", compact('survey'));
     }
 
+
+     /**
+     * Specific Create view
+     * Função responsável por exibir a tela de criação de vistorias específicas
+     */
+    public function management() 
+    {
+        $survey = new Survey();
+        return view("survey.gs.index", compact('survey'));
+    }
 
     /**
      * Show the form for creating a new resource.

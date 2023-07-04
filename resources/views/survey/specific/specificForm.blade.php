@@ -4,7 +4,7 @@
             <div class="col-md-6 mb-1">
                 <div class="form-group">
                     {{ Form::label('Tipo vistoria') }}
-                    {{ Form::select('type_id', [], old(""), ['class' => 'form-control select' . ($errors->has('type_id') ? ' is-invalid' : ''), 'placeholder' => 'Específica']) }}
+                    {{ Form::text('type_name', "Específica", ['class' => 'form-control select' . ($errors->has('type_name') ? ' is-invalid' : ''),  'placeholder' => 'Especifica', 'readonly' => true]) }}
                     {!! $errors->first('type_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Nome Prédio') }}
-                    {{ Form::text('building_id', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('building_id', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'placeholder' => '','readonly' => true]) }}
                     {!! $errors->first('building_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Diretoria') }}
-                    {{ Form::text('diretory', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('diretory', $survey->intervention_code, ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'placeholder' => '','readonly' => true]) }}
                     {!! $errors->first('diretory', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -178,7 +178,7 @@
         </div>-->
 
     </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+    <div class="col-md-12 box-footer mt20">
+        <button type="submit" class="btn btn-primary" style="width: 100%">Cadastrar Vistoria</button>
     </div>
 </div>

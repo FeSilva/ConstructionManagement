@@ -77,8 +77,9 @@
                     if (data.items.length > 0) {
                         $("#itens").html('');
                         $.each(data.items, function (key, value) {
-                            if (value.surveyItemProgress) {
-                                var progress = value.surveyItemProgress.progress;
+
+                            if (value.survey_item_progress) {
+                                var progress = value.survey_item_progress.progress;
                             } else {
                                 var progress = '';
                             }
@@ -102,7 +103,6 @@
                                 "<td><input type='text' class='form-control porcentagemAtual' name='item_" + value.id + "' id='item_" + value.id + "'maxlength='6' onblur=valideValue("+value.id+")></td>" +
                                 "</tr>");
                             let itemId = value.id;
-
                         });
                     } else {
                         $("#itens").html('');

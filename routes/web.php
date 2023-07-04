@@ -118,15 +118,18 @@ Route::middleware([
 
 
             });
-         
-
             //Route::post('/oversight', [SurveyController::class, 'oversightStore'])->name('surveys.oversight.store');
            // Route::post('/opening', [SurveyController::class, 'openingStore'])->name('surveys.opening.store');
             //\Route::post('/transfer', [SurveyController::class, 'transferStore'])->name('surveys.transfers.store');
         });
 
-        Route::prefix('/gs')->group(function () {
-            //Gestão Social
+        Route::prefix('/management')->group(function () {
+            Route::get('/', [SurveyController::class, 'management'])->name('surveys.management.create');
+        });
+
+        
+        Route::prefix('/specific')->group(function () {
+            Route::get('/', [SurveyController::class, 'specific'])->name('surveys.specific.create');
         });
     });
 
@@ -135,10 +138,6 @@ Route::middleware([
         Route::get('/', [FileManagerController::class, 'index'])->name('filemanager.index');
     });
 
-    ///measurements
-    Route::prefix('/measurements')->group(function () {
-        Route::get('/', [MeansurentController::class, 'index'])->name('measurements.index');
-    });
 
 
     //Usuários

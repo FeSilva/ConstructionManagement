@@ -48,40 +48,31 @@
                 url: "{{ route('surveys.opening.load.pi')}}",
                 data: 'intervention_code=' + $(this).val(),
                 success: function (data) {
-                    console.log(data);
                     $('#ultimasVistorias').show();
-                    //$('#infos').click(function () {
-                     //   $('#modalInfos').modal('show');
-                    //})
-                    
-                    //data.surveys.sort().reverse();
-                    //loadLastestVistorias(data.vistorias);
-                    //$("#internvention_code").val(json.codigo);
-                    //document.querySelector('#modalInfos #exampleModalLabel').textContent = `Infos - ${json.codigo}`
                     $("#building_id").val(data.building.name);
                     $("#diretory").val(data.building.diretoria);
                     $('#assinatura').val(data.signatureDate);
                     $('#valor_total').val(data.total_price);
                     $('#fiscal').val(data.user.name);
-
                     $("#empresa_contratada").val(data.contractors_name);
                     $('#codigo_predio').val(data.building.codigo)
                     $("#diretoria_modal").val(data.building.diretoria);
                     $("#prazo_total").val(data.total_term);
                     $("#objeto_pi").val(data.pi_object);
-                    
             
                     if (data.items.length > 0) {
                         $("#itens").html('');
                         $.each(data.items, function (key, value) {
-                            if (value.andamento_items) {
-                                var progress = value.andamento_items.progress;
+                            console.log(value);
+
+                            if (value.survey_item_progress) {
+                                var progress = value.survey_item_progress.progress;
                             } else {
                                 var progress = '';
                             }
 
-                            if (value.dt_abertura) {
-                                var abertura = value.dt_abertura.replace(/(\d*)-(\d*)-(\d*).*/, '$3-$2-$1');
+                            if (value.date_open) {
+                                var abertura = value.date_open.replace(/(\d*)-(\d*)-(\d*).*/, '$3-$2-$1');
                             } else {
                                 var abertura = '';
                             }
