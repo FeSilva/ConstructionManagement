@@ -16,7 +16,7 @@ $configData = Helper::applClasses();
   <div class="auth-inner row m-0">
     <!-- Brand logo-->
     <a class="brand-logo" href="#">
-      <img src="{{ URL::asset('/storage/logo.jpg') }}" class="img-logo">
+      <img src="{{asset('images/logo/logo.jpg')}}" class="img-logo">
     </a>
     <!-- /Brand logo-->
 

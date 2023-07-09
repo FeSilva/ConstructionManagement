@@ -21,23 +21,44 @@ Class SurveyServices {
     }
 
     public function store($request, $file) {
-
-        dd($request['']);
+        $filePath = null;
         $interventionProcess = InterventionProcess::where("code", $request["intervention_code"])->with("building")->with("user")->first();
         $inspectionType = TypesInspection::where("name", $request["type_name"])->first();
         switch ($inspectionType->id) {
             case 1: 
                 $progress = 1;
                 break;
-            default:
+            case 3:
                 $progress = $request['progress_id'];
+            default:
+                $progress = null;
                 break;
         }
 
-        $filePath = null;
-        if($file) {
-            $filePath = $this->uploadFile($file, $request);
+        $name_archive = '';
+        switch ($inspectionType->id){
+            case 4:
+                $name_archive = 'OS_'.str_replace(".","",$interventionProcess->building->codigo).'_'.$request["inspection_date"];
+                break;
+            case 5:
+                $name_archive = 'OC_'.str_replace(".","",$interventionProcess->building->codigo).'_'.$request["inspection_date"];
+                break;
+            case 6:
+                $name_archive = 'RI_'.str_replace(".","",$interventionProcess->building->codigo).'_'.$request["inspection_date"];
+                break;
+            case 7:
+                $name_archive = 'GS_'.str_replace("/",".",$interventionProcess->code).'_'.$request["inspection_date"];
+                break;
+            case 8:
+                $name_archive = 'ST_'.str_replace("/",".",$interventionProcess->code).'_'.$request["inspection_date"];
+                if($file){
+                    $pastaName = 'seguranca_trabalho';
+                    Storage::putFileAs('public/archives/'.$pastaName, $file, $name_archive.'.pdf');
+                    $filePath = "archives/{$pastaName}/{$name_archive}.pdf"; //VALIDAR NOME
+                }
+                break;
         }
+
         $array = [
             'type_id' => $inspectionType->id,
             'intervention_id'=> $interventionProcess->id,
@@ -45,7 +66,8 @@ Class SurveyServices {
             "owner_id" => $interventionProcess->user->id,
             "intervention_code" => $request["intervention_code"],
             "building_code" => $interventionProcess->building->codigo,
-            "name_archive" => $filePath,
+            "arquivo" => $filePath,
+            "name_archive" => $name_archive,
             'status' => "Cadastro",
             "date_close" => $request['date_close'] ?? null,
             'employess' => $request['employess'] ?? null,
@@ -59,21 +81,26 @@ Class SurveyServices {
                 return new Exception("Já existe uma vistoria de $inspectionType->name para este código, e deve existir apenas uma.");
             }
         }
-        $items = SurveyItemProgress::where("intervention_id", $interventionProcess->id)->get();
-        foreach($items as $item) {
-            if($request["item_$item->id"]){
-                $itemId = $item->id;
+
+        $survey = Survey::create($array); // Create Vistoria;
+
+        if($inspectionType->id == 3) { //Fiscalização
+            $items = SurveyItemProgress::where("intervention_id", $interventionProcess->id)->get();
+            foreach($items as $item) {
+                if($request["item_$item->id"]){
+                    $itemId = $item->id;
+                }
             }
+
+            SurveyItemProgress::create([
+                'pi_id' => $interventionProcess->id,
+                'item_id' => $itemId,
+                'vistoria_id' => $survey->id,
+                'date_vistoria' => $survey->inspection_date,
+                'progress' => str_replace(',', '.', $request["item_$itemId"]),
+                'created_at' => now()
+            ]);
         }
-        $survey = Survey::create($array);
-        SurveyItemProgress::create([
-            'pi_id' => $interventionProcess->id,
-            'item_id' => $itemId,
-            'vistoria_id' => $survey->id,
-            'date_vistoria' => $survey->inspection_date,
-            'progress' => str_replace(',', '.', $request["item_$itemId"]),
-            'created_at' => now()
-        ]);
         return true;
     }
 

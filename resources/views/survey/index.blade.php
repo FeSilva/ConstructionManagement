@@ -11,10 +11,9 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-
-                    <div class="card-body">
+                    <div class="card-datatable table-responsive pt-0">
                         <table class="surveys-list-table table">
-                            <thead class="thead">
+                            <thead class="table-light">
                                 <tr>
                                     <th>Código</th>
                                     <th>Tipo</th>
@@ -58,7 +57,7 @@
                         </table>
                     </div>
                 </div>
-                {!! $surveys->links() !!}
+     
             </div>
         </div>
     </div>

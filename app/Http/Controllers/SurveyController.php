@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Survey;
+use App\Models\User;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use App\Services\SurveyServices;
 use Illuminate\Support\Facades\Storage;
@@ -14,8 +16,10 @@ use Illuminate\Support\Facades\Storage;
 class SurveyController extends Controller
 {
     protected $service;
+    protected $fiscal;
     public function __construct(SurveyServices $service) {
         $this->service = $service;
+        $this->fiscal = User::where("current_team_id", 2)->orderBy("name")->pluck("name","id");
         $this->service->getSurveysJson();
     }
     /**
@@ -73,8 +77,8 @@ class SurveyController extends Controller
      */
     public function specific() 
     {
-        $survey = new Survey();
-        return view("survey.specific.index", compact('survey'));
+        $fiscal = $this->fiscal;
+        return view("survey.specific.index", compact('fiscal'));
     }
 
 
@@ -84,20 +88,46 @@ class SurveyController extends Controller
      */
     public function management() 
     {
-        $survey = new Survey();
-        return view("survey.gs.index", compact('survey'));
+        $fiscal = $this->fiscal;
+        return view("survey.gs.index", compact('fiscal'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+    
+     /**
+     * Security Create view
+     * Função responsável por exibir a tela de criação de vistorias de segurança do trabalho
      */
-    public function create()
+    public function security() 
+    {
+        $fiscal = $this->fiscal;
+        return view("survey.security.index", compact('fiscal'));
+    }
+
+
+    /**
+     * Budget Create view
+     * Função responsável por exibir a tela de criação de vistorias de segurança do trabalho
+     */
+    public function complexo() 
     {
         $survey = new Survey();
-        return view('survey.create', compact('survey'));
+        $programas = Program::where("ativo", 1)->pluck("name","id");
+        $fiscal = $this->fiscal;
+        return view("survey.budget.complexo.index", compact('survey','programas','fiscal'));
     }
+
+      /**
+     * Budget Create view
+     * Função responsável por exibir a tela de criação de vistorias de segurança do trabalho
+     */
+    public function simple() 
+    {
+        $survey = new Survey();
+        $programas = Program::where("ativo", 1)->pluck("name","id");
+        $fiscal = $this->fiscal;
+        return view("survey.budget.simple.index", compact('survey','programas','fiscal'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -109,7 +139,7 @@ class SurveyController extends Controller
     {
         try {
             $request->flash();
-            $create = $this->service->store($request->except("_token"), $request->file("file_archive"));
+            $this->service->store($request->except("_token"), $request->file("file_archive"));
             return redirect()->back()
                 ->with('success', 'Vistoria Cadastrada com Sucesso.');
         } catch (\Exception $e) {

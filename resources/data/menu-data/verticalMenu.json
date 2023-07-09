@@ -95,61 +95,41 @@
         ]
     },
     {
-        "url": "#",
+        "url": "/surveys/specific",
         "name": "Especifica",
-        "icon": "lock",
+        "icon": "circle",
         "slug": "layout-full"
     },
     {
-        "url": "#",
+        "url": "/surveys/security",
         "name": "Segurança do Trabalho",
-        "icon": "lock",
+        "icon": "circle",
         "slug": "layout-full"
     },
     {
-        "url": "#",
+        "url": "/surveys/budget/simple",
         "name": "Orçamento Simples",
-        "icon": "lock",
+        "icon": "circle",
         "slug": "layout-full"
     },
     {
-        "url": "#",
+        "url": "/surveys/budget/complexo",
         "name": "Orçamento Complexo",
-        "icon": "lock",
+        "icon": "circle",
         "slug": "layout-full"
     },
     {
+        "url": "/surveys/management",
         "name": "Gestão Social",
-        "icon": "lock",
-        "slug": "layout-full",
-        "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
-        "submenu": [
-            {
-                "url": "#",
-                "name": "Antes da Obra",
-                "icon": "lock",
-                "slug": "layout-full"
-            },
-            {
-                "url": "#",
-                "name": "Pós Obra",
-                "icon": "lock",
-                "slug": "layout-full"
-            },
-            {
-                "url": "#",
-                "name": "Depois da Obra",
-                "icon": "lock",
-                "slug": "layout-full"
-            }
-        ]
+        "icon": "circle",
+        "slug": "layout-full"
     },
     {
         "navheader": "Lista de Envio",
         "slug": ""
     },
     {
-        "url": "shippinglist",
+        "url": "/shippinglist",
         "badge": "5",
         "name": "Enviar Vistorias",
         "icon": "send",

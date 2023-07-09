@@ -19,14 +19,14 @@ Class repository extends Survey {
         ->with("progress")
         ->with("user")
         ->with("rhythm")
-        ->orderBy('inspection_date', 'desc')->get();
+        ->orderBy('created_at', 'desc')->get();
 
         foreach ($surveys as $survey) {
             $infoList['data'][] = [
                 'id' => $survey->id,
                 'code' => $survey->interventionProcess->code,
                 'type' => $survey->typesInspection->name,
-                'progressName' => $survey->progress->name,
+                'progressName' => $survey->progress->name ?? null,
                 'owner' => $survey->user->name,
                 'date_final' => $survey->date_close,
                 'date_survey' => $survey->inspection_date,
@@ -34,6 +34,8 @@ Class repository extends Survey {
                 'status' => $survey->status
             ];
         }
+
+      
         return json_encode($infoList, true);
     }
 }

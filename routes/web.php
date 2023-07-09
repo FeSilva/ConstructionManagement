@@ -13,6 +13,8 @@ use App\Http\Controllers\InterventionProcessController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\FileManagerController;
 use App\Http\Controllers\MeansurentController;
+use App\Http\Controllers\ShippingListController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,7 +100,7 @@ Route::middleware([
         Route::patch('/update/{surveys_id}', [SurveyController::class, 'update'])->name('surveys.update');
         Route::delete('/destroy/{surveys_id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
         Route::get('/specific', [SurveyController::class, 'specific'])->name('surveys.specific.create');
-        Route::post('/specific', [SurveyController::class, 'store'])->name('surveys.specific.store');
+
 
         Route::prefix('/fs')->group(function () {
             Route::prefix('/opening')->group(function () {
@@ -125,12 +127,50 @@ Route::middleware([
 
         Route::prefix('/management')->group(function () {
             Route::get('/', [SurveyController::class, 'management'])->name('surveys.management.create');
+            Route::post('/store', [SurveyController::class, 'store'])->name('surveys.management.store');
+
         });
 
         
         Route::prefix('/specific')->group(function () {
             Route::get('/', [SurveyController::class, 'specific'])->name('surveys.specific.create');
+            Route::post('/store', [SurveyController::class, 'store'])->name('surveys.specific.store');
         });
+
+
+        
+        Route::prefix('/security')->group(function () {
+            Route::get('/', [SurveyController::class, 'security'])->name('surveys.security.create');
+            Route::post('/store', [SurveyController::class, 'store'])->name('surveys.security.store');
+        });
+
+        
+        
+        Route::prefix('/security')->group(function () {
+            Route::get('/', [SurveyController::class, 'security'])->name('surveys.security.create');
+            Route::post('/store', [SurveyController::class, 'store'])->name('surveys.specific.store');
+        });
+        
+        Route::prefix('/budget')->group(function () {
+            Route::get('/complexo', [SurveyController::class, 'complexo'])->name('surveys.budget.complexo.create');
+            Route::get('/simple', [SurveyController::class, 'simple'])->name('surveys.budget.simple.create');
+       
+        });
+        
+    });
+
+    //Shipping List
+    Route::prefix("/shippinglist")->group(function () {
+        Route::get("/", [ShippingListController::class,"index"])->name("shippinglist.index");
+
+        //validar uso
+        Route::get("/sendlist", [ShippingListController::class,"index"])->name("shippinglist.send");
+        Route::post('/store', [SurveyController::class, 'store'])->name('listaenvios.consultaMes');
+        Route::get("/listaenvios", [ShippingListController::class,"index"])->name("listaenvios.carrega");
+
+
+
+
     });
 
     //Prédios

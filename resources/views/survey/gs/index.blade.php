@@ -2,6 +2,7 @@
 
 @section('title', 'Vistorias Específicas')
 @section('content')
+    @component('components.messages._messages')@endcomponent
     <section class="container-fluid">
         <div class="row">
             <div class="col-md-12">
