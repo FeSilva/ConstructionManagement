@@ -30,7 +30,7 @@
             <div class="col-md-12 mb-2">
                 <div class="form-group">
                     {{ Form::label('Tipo vistoria') }}
-                    {{ Form::text('type_name', "Abertura", ['class' => 'form-control select' . ($errors->has('type_name') ? ' is-invalid' : ''),  'placeholder' => 'Abertura']) }}
+                    {{ Form::text('type_name', "Abertura", ['class' => 'form-control select' . ($errors->has('type_name') ? ' is-invalid' : ''),  'placeholder' => 'Abertura', "readonly" => true,]) }}
                     {!! $errors->first('type_name', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

@@ -206,6 +206,10 @@ class SurveyController extends Controller
     public function load_intervention(Request $request) {
         try { 
             $interventionProcess = $this->service->load_intervention($request->post("intervention_code"));
+            
+            if (empty($interventionProcess)) {
+                return response()->json(["message" => 'Processo de intervenção não encontrado.'], 200);
+            }
             return response()->json($interventionProcess, 200);
         } catch (\Exception $e) {
             return $e->getMessage();

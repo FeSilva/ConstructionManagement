@@ -9,7 +9,7 @@
                 @includeif('partials.errors')
                 <div class="card card-default">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('surveys.opening.store') }}"  role="form" enctype="multipart/form-data" accept="application/pdf">
+                        <form method="POST" action="{{ route('surveys.opening.store') }}"  id="openForm" role="form" enctype="multipart/form-data" accept="application/pdf">
                             @csrf
                             @include('survey.fs.forms.openingForm')
                         </form>
@@ -28,13 +28,16 @@
         $('#infos').hide();
         $('#ultimasVistorias').hide();
         //MASK
-       // $('#codigo_pi').mask('0000/00000');
-        /*$('#codigo_predio').mask('00.00.000');
+        $('#infos').hide();
+        $('#ultimasVistorias').hide();
+        //MASK
+        $('#intervention_code').mask('0000/00000');
+        $('#codigo_predio').mask('00.00.000');
         $('#telefone').mask('(00) 00000-0000');
         $('#media_global').mask('##0,00', {reverse: true});
         $('#valor_total').mask('#.##0,00', {
             reverse: true
-        });*/
+        });
         $("#intervention_code").change(function () {
             $.ajax({
                 headers: {
@@ -44,15 +47,15 @@
                 url: "{{ route('surveys.opening.load.pi')}}",
                 data: 'intervention_code=' + $(this).val(),
                 success: function (data) {
-                    //$('#ultimasVistorias').show();
-                    //$('#infos').click(function () {
-                     //   $('#modalInfos').modal('show');
-                    //})
                     
-                    //data.surveys.sort().reverse();
-                    //loadLastestVistorias(data.vistorias);
-                    //$("#internvention_code").val(json.codigo);
-                    //document.querySelector('#modalInfos #exampleModalLabel').textContent = `Infos - ${json.codigo}`
+                    if(data.message) {
+                        alert(data.message);
+                        $("#intervention_code").focus();
+                        $('#openForm').trigger("reset");
+                        $("#itens").html('');
+                        return;
+                    }
+
                     $("#building_id").val(data.building.name);
                     $("#diretory").val(data.building.diretoria);
                     $('#assinatura').val(data.signatureDate);

@@ -12,7 +12,7 @@
                         <span class="card-title">Cadastro de Vistoria</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route("surveys.transfer.store")}}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{route("surveys.transfer.store")}}"  id="transferForm" role="form" enctype="multipart/form-data">
                             @csrf
                             @include('survey.fs.forms.transferForm')
                             <hr />
@@ -26,19 +26,19 @@
 @endsection
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script type="text/javascript">
     $(document).ready(function () {
         $('#infos').hide();
         $('#ultimasVistorias').hide();
         //MASK
-        //$('#intervention_code').mask('0000/00000');
-        /*$('#codigo_predio').mask('00.00.000');
+        $('#intervention_code').mask('0000/00000');
+        $('#codigo_predio').mask('00.00.000');
         $('#telefone').mask('(00) 00000-0000');
         $('#media_global').mask('##0,00', {reverse: true});
         $('#valor_total').mask('#.##0,00', {
             reverse: true
-        });*/
+        });
         $("#intervention_code").change(function () {
             $.ajax({
                 headers: {
@@ -48,6 +48,15 @@
                 url: "{{ route('surveys.opening.load.pi')}}",
                 data: 'intervention_code=' + $(this).val(),
                 success: function (data) {
+                    
+                    if(data.message) {
+                        alert(data.message);
+                        $("#intervention_code").focus();
+                        $('#transferForm').trigger("reset");
+                        $("#itens").html('');
+                        return;
+                    }
+
                     $('#ultimasVistorias').show();
                     $("#building_id").val(data.building.name);
                     $("#diretory").val(data.building.diretoria);
