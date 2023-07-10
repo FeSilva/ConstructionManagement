@@ -19,7 +19,9 @@ Class repository extends Survey {
         ->with("progress")
         ->with("user")
         ->with("rhythm")
-        ->orderBy('created_at', 'desc')->get();
+        ->orderBy('created_at', 'desc')
+        ->get();
+
 
         foreach ($surveys as $survey) {
             $infoList['data'][] = [
@@ -34,8 +36,6 @@ Class repository extends Survey {
                 'status' => $survey->status
             ];
         }
-
-      
         return json_encode($infoList, true);
     }
 }

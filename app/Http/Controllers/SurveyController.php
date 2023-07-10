@@ -29,16 +29,7 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        $surveys = Survey::with("interventionProcess")
-        ->with("typesInspection")
-        ->with("progress")
-        ->with("user")
-        ->with("rhythm")
-        ->orderBy('inspection_date', 'desc')
-        ->paginate();
-
-        return view('survey.index', compact('surveys'))
-            ->with('i', (request()->input('page', 1) - 1) * $surveys->perPage());
+        return view('survey.index');
     }
 
     /**
@@ -139,7 +130,11 @@ class SurveyController extends Controller
     {
         try {
             $request->flash();
-            $this->service->store($request->except("_token"), $request->file("file_archive"));
+            $service = $this->service->store($request->except("_token"), $request->file("file_archive"));
+            if (isset($service['code']) and $service['code'] == 400){
+                return redirect()->back()
+                ->with('error', $service['message']);
+            }
             return redirect()->back()
                 ->with('success', 'Vistoria Cadastrada com Sucesso.');
         } catch (\Exception $e) {

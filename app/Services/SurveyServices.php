@@ -21,6 +21,7 @@ Class SurveyServices {
     }
 
     public function store($request, $file) {
+        try {
         $filePath = null;
         $interventionProcess = InterventionProcess::where("code", $request["intervention_code"])->with("building")->with("user")->first();
         $inspectionType = TypesInspection::where("name", $request["type_name"])->first();
@@ -77,11 +78,13 @@ Class SurveyServices {
 
         if ($inspectionType->id == 1 || $inspectionType->id == 2) {
             $survey = Survey::where("intervention_code", $request["intervention_code"])->where("type_id", $inspectionType->id)->first();
+            
             if ($survey) { 
-                return new Exception("Já existe uma vistoria de $inspectionType->name para este código, e deve existir apenas uma.");
+                return ["message" => "Já existe uma vistoria de $inspectionType->name para este código, e deve existir apenas uma.", "code" => 400];
             }
         }
-
+          
+   
         $survey = Survey::create($array); // Create Vistoria;
 
         if($inspectionType->id == 3) { //Fiscalização
@@ -102,6 +105,9 @@ Class SurveyServices {
             ]);
         }
         return true;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
 
@@ -123,6 +129,7 @@ Class SurveyServices {
     }
     private function jsonSurveyTable($json) {
         try{
+
             return Storage::disk('public')->put("tables/table-surveys-list.json", $json);
         }catch (\Exception $e) {
             dd($e->getMessage());
