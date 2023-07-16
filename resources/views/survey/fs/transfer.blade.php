@@ -17,6 +17,10 @@
                             @include('survey.fs.forms.transferForm')
                             <hr />
                             @include('survey.fs.forms.itemsForm')
+
+                            <div class="col-md-12 box-footer mt20">
+                                <button type="submit" class="btn btn-primary" style="width: 100%">Cadastrar Vistoria</button>
+                            </div>
                         </form>
                     </div>
                 </div>
