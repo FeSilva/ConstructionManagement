@@ -58,6 +58,7 @@ return array(
     'App\\Models\\ItemsPi' => $baseDir . '/app/Models/ItemsPi.php',
     'App\\Models\\Meansurent' => $baseDir . '/app/Models/Meansurent.php',
     'App\\Models\\Membership' => $baseDir . '/app/Models/Membership.php',
+    'App\\Models\\Program' => $baseDir . '/app/Models/Program.php',
     'App\\Models\\Rhythms' => $baseDir . '/app/Models/Rhythms.php',
     'App\\Models\\Survey' => $baseDir . '/app/Models/Survey.php',
     'App\\Models\\SurveyItemProgress' => $baseDir . '/app/Models/SurveyItemProgress.php',

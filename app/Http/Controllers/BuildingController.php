@@ -24,6 +24,10 @@ class BuildingController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $buildings->perPage());
     }
 
+    public function getBuilding(Request $request) {
+        $data = $request->all();
+        return Building::where("codigo", $data['code'])->first();
+    }
     /**
      * Show the form for creating a new resource.
      *

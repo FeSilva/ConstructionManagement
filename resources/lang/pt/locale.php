@@ -23,6 +23,8 @@ return [
     "Fiscalização" => 'Fiscalização',
     "Prédios" => 'Prédios',
     "Vistorias" => 'Vistorias',
+    'Aprovação de Vistorias'=>"Aprovação de Vistorias",
+    'Anexar Comprovante' => "Anexar Comprovante",
     "Segurança do Trabalho" => 'Segurança do Trabalho',
     "Gestão Social" => 'Gestão Social',
     "Orçamento Simples" => 'Orçamento Simples',

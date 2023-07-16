@@ -662,6 +662,7 @@ class ComposerStaticInitff31a41e49b74dc0f8db49fc8977814c
         'App\\Models\\ItemsPi' => __DIR__ . '/../..' . '/app/Models/ItemsPi.php',
         'App\\Models\\Meansurent' => __DIR__ . '/../..' . '/app/Models/Meansurent.php',
         'App\\Models\\Membership' => __DIR__ . '/../..' . '/app/Models/Membership.php',
+        'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
         'App\\Models\\Rhythms' => __DIR__ . '/../..' . '/app/Models/Rhythms.php',
         'App\\Models\\Survey' => __DIR__ . '/../..' . '/app/Models/Survey.php',
         'App\\Models\\SurveyItemProgress' => __DIR__ . '/../..' . '/app/Models/SurveyItemProgress.php',

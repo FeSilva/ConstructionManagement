@@ -49,7 +49,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Código Prédio') }}
-                    {{ Form::text('building_code', '', ['class' => 'form-control' . ($errors->has('building_code') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                    {{ Form::text('building_code', '', ['class' => 'form-control' . ($errors->has('building_code') ? ' is-invalid' : ''), 'placeholder' => '', 'id' => "building_code"]) }}
                     {!! $errors->first('building_code', '<div class="invalid-feedback">:message</div>') !!}
                 </div>          
             </div>
@@ -57,7 +57,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Nome Prédio') }}
-                    {{ Form::text('building_id', '', ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'placeholder' => '','readonly' => true]) }}
+                    {{ Form::text('building_id', '', ['class' => 'form-control' . ($errors->has('building_id') ? ' is-invalid' : ''), 'placeholder' => '','readonly' => true, 'id' => 'building_id']) }}
                     {!! $errors->first('building_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Diretoria') }}
-                    {{ Form::text('diretory', '', ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'placeholder' => '','readonly' => true]) }}
+                    {{ Form::text('diretory', '', ['class' => 'form-control' . ($errors->has('diretory') ? ' is-invalid' : ''), 'placeholder' => '','readonly' => true, 'id' => 'diretory']) }}
                     {!! $errors->first('diretory', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

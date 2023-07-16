@@ -8,10 +8,11 @@ use App\Models\SurveyItemProgress;
 use App\Models\Survey;
 
 use App\Models\surveys\repository;
-use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
 
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 Class SurveyServices {
 
@@ -72,13 +73,14 @@ Class SurveyServices {
             'status' => "Cadastro",
             "date_close" => $request['date_close'] ?? null,
             'employess' => $request['employess'] ?? null,
+            'advance_work' => $request['advance_work'] ?? null,
             "physical_progress" => $request['physical_progress'] ?? 1.00,
             "inspection_date" => $request["inspection_date"],
+            'created_by' => Auth::user()->id,
         ];
 
         if ($inspectionType->id == 1 || $inspectionType->id == 2) {
             $survey = Survey::where("intervention_code", $request["intervention_code"])->where("type_id", $inspectionType->id)->first();
-            
             if ($survey) { 
                 return ["message" => "Já existe uma vistoria de $inspectionType->name para este código, e deve existir apenas uma.", "code" => 400];
             }
@@ -87,7 +89,7 @@ Class SurveyServices {
    
         $survey = Survey::create($array); // Create Vistoria;
 
-        if($inspectionType->id == 3) { //Fiscalização
+        if($inspectionType->id == 3 || $inspectionType->id == 2) { //Fiscalização
             $items = SurveyItemProgress::where("intervention_id", $interventionProcess->id)->get();
             foreach($items as $item) {
                 if($request["item_$item->id"]){
@@ -146,5 +148,26 @@ Class SurveyServices {
         ->where("code", $interventionCode)
         ->first();
         return $interventionProcess;
+    }
+
+    public function getSurveysForFileName($fileName) {
+        try{
+			//Transformando em um array
+			$piCod = preg_replace('/\./', '-', explode('_', $fileName));
+			$dateCreate = date_create(str_replace("-pdf", "", $piCod[1]));
+			$data = date_format($dateCreate, "Y-m-d");
+			$codigo = substr($piCod[0], 0, 4) . '/' . substr($piCod[0], 5, 11);
+			return Survey::with('interventionProcess')
+						->with('user')
+						->where('intervention_code', $codigo)
+						->where('inspection_date', $data)
+						->where('status', 'Cadastro')
+						->first();
+		} catch (\Exception $e) {
+			echo '<pre>';
+			var_dump(str_replace("-pdf", "", $piCod[1]));
+			echo $e->getMessage();
+			return $e->getMessage();
+		}
     }
 }

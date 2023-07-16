@@ -70,6 +70,7 @@ class Survey extends Model
         'archive',
         'name_archive',
         'employess',
+        'advance_work',
         'status',
         'physical_progress',
         'merge'];

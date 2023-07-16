@@ -23,3 +23,37 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#infos').hide();
+        $('#ultimasVistorias').hide();
+        //MASK
+        $('#intervention_code').mask('0000/00000');
+        $('#building_code').mask('00.00.000');
+     
+        $("#building_code").change(function(){
+            $.ajax({
+                headers: {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
+                },
+                type: 'POST',
+                url: "{{ route('getBuilding')}}",
+                data: 'code='+ $(this).val(),
+                success: function (data) {
+                    $("#diretory").val(data.diretoria);
+                    $("#building_id").val(data.name);
+                },
+                error: function(error){
+                    alert(error);
+                }
+            });
+
+        });
+
+    
+    });
+</script>
+@endpush

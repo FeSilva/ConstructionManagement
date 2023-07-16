@@ -62,7 +62,7 @@
                     $("#diretory").val(data.building.diretoria);
                     $('#assinatura').val(data.signatureDate);
                     $('#valor_total').val(data.total_price);
-                    $('#fiscal').val(data.user.name);
+                    $('#owner_id').val(data.user.id);
                     $("#empresa_contratada").val(data.contractors_name);
                     $('#codigo_predio').val(data.building.codigo)
                     $("#diretoria_modal").val(data.building.diretoria);
@@ -108,5 +108,20 @@
             });
         });
     });
+
+    function valideValue(data){
+        var value = $("#item_"+data).val();
+        var lastValue = $("#progressLast_"+data).val()
+        if(value.replace(',','.') > 100.00){
+            alert('Valor não pode ser maior que 100,00%');
+            $("#item_"+data).val('').focus();
+            return;
+        }
+        if(parseFloat(lastValue)  >  parseFloat(value.replace(",","."))){
+            alert('Valor não pode ser menor que o anterior');
+            $("#item_"+data).val('').focus();
+            return;
+        }
+    }
     </script>
 @endpush

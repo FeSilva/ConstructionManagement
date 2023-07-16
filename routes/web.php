@@ -14,6 +14,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\FileManagerController;
 use App\Http\Controllers\MeansurentController;
 use App\Http\Controllers\ShippingListController;
+use App\Http\Controllers\UploadZipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,7 @@ Route::middleware([
         Route::get('/create', [BuildingController::class, 'create'])->name('buildings.create');
         Route::get('/show/{id}', [BuildingController::class, 'show'])->name('buildings.show');
         Route::get('/edit/{id}', [BuildingController::class, 'edit'])->name('buildings.edit');
-        
+        Route::post('/getbuilding', [BuildingController::class, 'getBuilding'])->name('getBuilding');
         Route::post('/store', [BuildingController::class, 'store'])->name('buildings.store');
         Route::patch('/update/{id}', [BuildingController::class, 'update'])->name('buildings.update');
         Route::delete('/destroy/{id}', [BuildingController::class, 'destroy'])->name('buildings.destroy');
@@ -178,6 +179,11 @@ Route::middleware([
         Route::get('/', [FileManagerController::class, 'index'])->name('filemanager.index');
     });
 
+
+      //Prédios
+    Route::prefix('/uploadzip')->group(function () {
+        Route::get('/', [UploadZipController::class, 'index'])->name('uploadzip.index');
+    });
 
 
     //Usuários

@@ -11,7 +11,7 @@
                       <div class="col-md-2 col-6">
                         <div class="d-flex align-items-center">
                           <div class="card-info">
-                            <h5 class="mb-0">0</h5>
+                            <h5 class="mb-0">{{$fiscalization}}</h5>
                             <small>Fiscalização</small>
                           </div>
                         </div>
@@ -19,7 +19,7 @@
                       <div class="col-md-2 col-6">
                         <div class="d-flex align-items-center">
                           <div class="card-info">
-                            <h5 class="mb-0">43</h5>
+                            <h5 class="mb-0">{{$securityOfWork}}</h5>
                             <small>Segurança</small>
                           </div>
                         </div>
@@ -27,7 +27,7 @@
                       <div class="col-md-2 col-6">
                         <div class="d-flex align-items-center">
                           <div class="card-info">
-                            <h5 class="mb-0">23</h5>
+                            <h5 class="mb-0">{{$budgetSimple}}</h5>
                             <small>Orçamento Simples</small>
                           </div>
                         </div>
@@ -35,7 +35,7 @@
                       <div class="col-md-2 col-6">
                         <div class="d-flex align-items-center">
                           <div class="card-info">
-                            <h5 class="mb-0">0</h5>
+                            <h5 class="mb-0">{{$budgetComplex}}</h5>
                             <small>Orçamento Complexo</small>
                           </div>
                         </div>
@@ -44,7 +44,7 @@
                       <div class="col-md-2 col-6">
                         <div class="d-flex align-items-center">
                           <div class="card-info">
-                            <h5 class="mb-0">5</h5>
+                            <h5 class="mb-0">{{$specific}}</h5>
                             <small>Especifica</small>
                           </div>
                         </div>
@@ -52,7 +52,7 @@
                       <div class="col-md-2 col-6">
                         <div class="d-flex align-items-center">
                           <div class="card-info">
-                            <h5 class="mb-0">0</h5>
+                            <h5 class="mb-0">{{$management}}</h5>
                             <small>Gestão Social</small>
                           </div>
                         </div>
@@ -298,17 +298,13 @@
                 success: function (data) {
 
                     $('#listagem').html('');
-
                     if (data[0]) {
                         $('#listaEnvios').show();
                         $.each(data, function (index, value) {
-
                             if (index != 'totalSizeBytes' &&
                                 index != 'totalSizeMb'
                             ) {
-
                                 let dtVistoria = value.data.split('-').reverse().join("/");
-
                                 $('#listagem').append('<tr>' +
                                     `<input type='hidden' name='valueSizeKb_${value.id}' id='valueSizeKb_${value.id}' value='${value.size}'>` +
                                     "<td>" + value.codigo + '</td>' +

@@ -125,6 +125,16 @@
         "slug": "layout-full"
     },
     {
+        "navheader": "Aprovação de Vistorias",
+        "slug": ""
+    },
+    {
+        "url": "/uploadzip",
+        "name": "Anexar Comprovante",
+        "icon": "upload",
+        "slug": "shippinglist"
+    },
+    {
         "navheader": "Lista de Envio",
         "slug": ""
     },
@@ -147,9 +157,8 @@
     },
     {
         "url": "measurements",
-        "badge": "5",
         "name": "Relatórios",
-        "icon": "circle",
+        "icon": "lock",
         "slug": "measurements"
     },
     {

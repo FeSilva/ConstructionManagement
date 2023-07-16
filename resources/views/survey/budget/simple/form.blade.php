@@ -29,7 +29,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Fiscal') }}
-                    {{ Form::select('owner_id', $fiscal, old(''),  ['class' => 'form-control' . ($errors->has('owner_id') ? ' is-invalid' : ''), 'placeholder' => 'Selecione']) }}
+                    {{ Form::select('owner_id', $fiscal, old(''),  ['class' => 'form-control' . ($errors->has('owner_id') ? ' is-invalid' : ''), 'placeholder' => 'Selecione', 'id'=>'owner_id']) }}
                     {!! $errors->first('owner_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -42,7 +42,6 @@
                     <small><span id="add-btn" class="btn btn-success" disabled>Adicionar +</span></small>
                     <datalist id="sel-opts">
                         @foreach ($programas as $key => $programa)
-
                             <option value="{{ $programa }}">{{ $programa }}</option>
                         @endforeach
                     </datalist>
