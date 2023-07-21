@@ -135,7 +135,7 @@
                                   @component('components.buttons._submit', [
                                       'title' => 'Gerar Lista',
                                       'type' => 'button',
-                                      'attributes' => 'onclick=listarEnvios()'
+                                      'attributes' => 'onclick=getList()'
                                   ])
                                   @endcomponent
                               </div>
@@ -152,7 +152,7 @@
                           <div class="row" id="listaEnvios">
                               <table class="table">
                                   <tr>
-                                      <th>Tipo Vistoria</th>
+                                      <th>Codigo Vistoria</th>
                                       <th>Data Vistoria</th>
                                       <th>Status</th>
                                       <th><input type="checkbox" id="checkAll" onclick="checkAllcheckbox()"></th>
@@ -172,13 +172,13 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function () {
+        /*$(document).ready(function () {
             $("#listaEnvios").hide();
             $("#buttonEnviarEmail").hide();
             $("#buttonEnviarEmail").click(function() {
                 $('#largeModal').show();
             });
-        });
+        });*/
 
         function  consultaListaMes(mes){
             $.ajax({
@@ -199,6 +199,7 @@
                 }
             });
         }
+
         function checkAllcheckbox() {
             let checkboxs = $('input[type="checkbox"]');
             $.each(checkboxs, function (index, checkbox) {
@@ -287,16 +288,16 @@
             }
         }
 
-        function listarEnvios() {
+        function getList() {
             $.ajax({
                 headers: {
                     'X-CSRF-Token': $('input[name="_token"]').val()
                 },
-                type: 'post',
-                url: "",
-                data: {},
+                type: 'POST',
+                url: "{{route('shippinglist.getList')}}",
+                data: "",
                 success: function (data) {
-
+                    console.log(data);
                     $('#listagem').html('');
                     if (data[0]) {
                         $('#listaEnvios').show();

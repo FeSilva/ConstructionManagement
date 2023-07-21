@@ -19,7 +19,7 @@ Class repository extends Survey {
         ->with("progress")
         ->with("user")
         ->with("rhythm")
-        ->orderBy('created_at', 'desc')
+        ->orderBy("created_at", 'desc')
         ->get();
 
 
@@ -30,12 +30,16 @@ Class repository extends Survey {
                 'type' => $survey->typesInspection->name,
                 'progressName' => $survey->progress->name ?? null,
                 'owner' => $survey->user->name,
-                'date_final' => $survey->date_close,
-                'date_survey' => $survey->inspection_date,
+                'date_final' => date_format(date_create($survey->date_close), 'd/m/Y'),
+                'date_survey' => date_format(date_create($survey->inspection_date), 'd/m/Y'),
                 'progress_number' => $survey->physical_progress,
-                'status' => $survey->status
+                'status' => $survey->status,
+                'created' => date_format(date_create($survey->created_at), 'd/m/Y H:i:s')
             ];
+
         }
+
+        
         return json_encode($infoList, true);
     }
 }

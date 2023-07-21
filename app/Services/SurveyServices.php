@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Auth;
 Class SurveyServices {
 
     protected $repository;
-    public function __construct(repository $repository) {
-        $this->repository = $repository;
+    public function __construct() {
+        $this->repository = new repository();
     }
 
     public function store($request, $file) {
@@ -164,9 +164,6 @@ Class SurveyServices {
 						->where('status', 'Cadastro')
 						->first();
 		} catch (\Exception $e) {
-			echo '<pre>';
-			var_dump(str_replace("-pdf", "", $piCod[1]));
-			echo $e->getMessage();
 			return $e->getMessage();
 		}
     }

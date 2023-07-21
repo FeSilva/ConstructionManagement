@@ -102,7 +102,6 @@ Route::middleware([
         Route::delete('/destroy/{surveys_id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
         Route::get('/specific', [SurveyController::class, 'specific'])->name('surveys.specific.create');
 
-
         Route::prefix('/fs')->group(function () {
             Route::prefix('/opening')->group(function () {
                 Route::get('/', [SurveyController::class, 'opening'])->name('surveys.opening.create');
@@ -118,12 +117,7 @@ Route::middleware([
             Route::prefix("/oversight")->group(function () {
                 Route::get('/', [SurveyController::class, 'oversight'])->name('surveys.oversight.create');
                 Route::post('/store', [SurveyController::class, 'store'])->name('surveys.oversight.store');
-
-
             });
-            //Route::post('/oversight', [SurveyController::class, 'oversightStore'])->name('surveys.oversight.store');
-           // Route::post('/opening', [SurveyController::class, 'openingStore'])->name('surveys.opening.store');
-            //\Route::post('/transfer', [SurveyController::class, 'transferStore'])->name('surveys.transfers.store');
         });
 
         Route::prefix('/management')->group(function () {
@@ -132,21 +126,16 @@ Route::middleware([
 
         });
 
-        
         Route::prefix('/specific')->group(function () {
             Route::get('/', [SurveyController::class, 'specific'])->name('surveys.specific.create');
             Route::post('/store', [SurveyController::class, 'store'])->name('surveys.specific.store');
         });
-
-
         
         Route::prefix('/security')->group(function () {
             Route::get('/', [SurveyController::class, 'security'])->name('surveys.security.create');
             Route::post('/store', [SurveyController::class, 'store'])->name('surveys.security.store');
         });
 
-        
-        
         Route::prefix('/security')->group(function () {
             Route::get('/', [SurveyController::class, 'security'])->name('surveys.security.create');
             Route::post('/store', [SurveyController::class, 'store'])->name('surveys.specific.store');
@@ -167,11 +156,7 @@ Route::middleware([
         //validar uso
         Route::get("/sendlist", [ShippingListController::class,"index"])->name("shippinglist.send");
         Route::post('/store', [SurveyController::class, 'store'])->name('listaenvios.consultaMes');
-        Route::get("/listaenvios", [ShippingListController::class,"index"])->name("listaenvios.carrega");
-
-
-
-
+        Route::post("/getlist", [ShippingListController::class,"getList"])->name("shippinglist.getList");
     });
 
     //Prédios
@@ -179,12 +164,11 @@ Route::middleware([
         Route::get('/', [FileManagerController::class, 'index'])->name('filemanager.index');
     });
 
-
-      //Prédios
+    //Prédios
     Route::prefix('/uploadzip')->group(function () {
         Route::get('/', [UploadZipController::class, 'index'])->name('uploadzip.index');
+        Route::post('/descompact', [UploadZipController::class, 'descompactZip'])->name('uploadzip.descompact');
     });
-
 
     //Usuários
     Route::prefix('/user')->group(function () {
@@ -193,29 +177,9 @@ Route::middleware([
         Route::post('/store', [UserController::class, 'store'])->name('users.store');
     });
 
-
     //Calendar
     Route::prefix('/calendar')->group(function () {
         Route::get('/', [CalendarController::class, 'index'])->name('calendar');
     });
 });
 
-
-/*Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'role:admin'
-])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'], function () {
-        return view('dashboard.index');
-    })->name('dashboard');
-
-  
-    Route::prefix('/company')->group(function () {
-        Route::get('/', [CompanyController::class, 'index'])->name('company');
-        Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
-
-    });
-
-});*/

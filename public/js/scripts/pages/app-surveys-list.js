@@ -19,12 +19,12 @@ $(function () {
         { data: 'date_survey' },
         { data: 'progress_number' },
         { data: 'status' },
+        { data: 'created' },
         { data: '' }
         ],
         columnDefs: [
             {
                 targets: 1,
-                responsivePriority: 1,
             },
             {
                 targets: 2,
@@ -65,10 +65,13 @@ $(function () {
                     );
                 }
             },
-    
+            {
+                targets: 8,
+                responsivePriority: 1,
+            },
             {
                 // Actions
-                targets: 8,
+                targets: 9,
                 title: 'Ações',
                 searchable: false,
                 orderable: false,
@@ -93,6 +96,7 @@ $(function () {
                 }
             }
         ],
+        order: [[9, 'desc']],
         dom:
         '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"' +
         '<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l>' +

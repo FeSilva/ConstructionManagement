@@ -23,6 +23,7 @@
                                     <th>Data da Vistoria</th>
                                     <th>Progresso Fisico</th>
                                     <th>Status</th>
+                                    <th>Data de Cadastro</th>
                                     <th></th>
                                 </tr>
                             </thead>

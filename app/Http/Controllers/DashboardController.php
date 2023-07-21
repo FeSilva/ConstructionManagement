@@ -29,8 +29,8 @@ class DashboardController extends Controller
             $q->where("team_id", '=', 2);
         })->with("surveys")->get();
         $surveys = Survey::get();
-        $accomplished = $surveys->whereIn("status", ['aprovado','Enviado'])->count();
-        $outstanding = $surveys->where("status", 'cadastro')->count();
+        $accomplished = $surveys->where("status", 'Aprovado')->count();
+        $outstanding = $surveys->where("status", 'Cadastro')->count();
         $this->userService->jsonUserTable($this->userService->getSupervisorList($supervisor), true);
         return view("dashboard.index", compact('accomplished', 'outstanding'));
     }

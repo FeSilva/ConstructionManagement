@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Building;
+use App\Models\Contractor;
 use App\Models\InterventionProcess;
+use App\Models\Program;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -30,8 +34,13 @@ class InterventionProcessController extends Controller
      */
     public function create()
     {
+        $buildings = Building::pluck("id","name");
+        $contractors = Contractor::pluck("fantasy_name","id");
+        $fiscal = User::where("current_team_id", 2)->orderBy("name")->pluck("name","id");
+        $programas = Program::where("ativo", 1)->pluck("name","id");
+
         $interventionProcess = new InterventionProcess();
-        return view('intervention-process.create', compact('interventionProcess'));
+        return view('intervention-process.create', compact('interventionProcess','buildings','contractors','fiscal','programas'));
     }
 
     /**

@@ -30,7 +30,8 @@
         <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i data-feather="grid"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-end">
+        @php
+        /*<div class="dropdown-menu dropdown-menu-end">
           <a class="dropdown-item" href="#">
             <i class="me-1" data-feather="check-square"></i>
             <span class="align-middle">Todo</span>
@@ -47,7 +48,8 @@
             <i class="me-1" data-feather="calendar"></i>
             <span class="align-middle">Calendar</span>
           </a>
-        </div>
+        </div>*/
+        @endphp
       </div>
     </div>
   </div>

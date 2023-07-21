@@ -73,7 +73,8 @@ class Survey extends Model
         'advance_work',
         'status',
         'physical_progress',
-        'merge'];
+        'merge',
+        'created_at'];
 
 
     /**

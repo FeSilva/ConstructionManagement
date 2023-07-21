@@ -13,7 +13,7 @@
                     <div class="card-body">
                         @component('components._form',[
                             'method' => 'POST',
-                            'action' => '',
+                            'action' => "/uploadzip/descompact",
                             'attributes' => 'enctype=multipart/form-data accept=application/pdf'
                         ])
                             @slot('slot')

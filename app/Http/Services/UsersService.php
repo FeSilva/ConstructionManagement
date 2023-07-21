@@ -53,22 +53,25 @@ class UsersService
     {
         foreach($supervisors as $key => $supervisor) {
             if (count($supervisor->surveys) > 1) {
-         
                 $pendentes = 0;
                 $aprovado = 0;
                 $enviado = 0;
+                $fiscais[$key] = [
+                    "id" => $supervisor->id,
+                    "email" => $supervisor->email,
+                    "avatar" => $supervisor->profile_photo_path,
+                    "supervisor" => $supervisor->name
+                ];
                 foreach($supervisor->surveys as $keySurvey => $survey) {
-                    $fiscais[$key] = [
-                        "id" => $supervisor->id,
-                        "email" => $supervisor->email,
-                        "avatar" => $supervisor->profile_photo_path,
-                        "supervisor" => $supervisor->name,
-                        'pendentes' => $survey->status == 'cadastro'? $pendentes++ : $pendentes,
-                        'aprovado' =>  $survey->status == 'aprovado'? $aprovado++ : $aprovado,
-                        'enviado' => $survey->status == 'Enviado'? $enviado++ : $enviado
-                    ];
-                  
+                    $survey->status == "Cadastro" ? $pendentes++ : $pendentes;
+                    $survey->status == "Aprovado" ? $aprovado++ : $aprovado;
+                    $survey->status == "Enviado" ? $enviado++ : $enviado;
                 }
+                $fiscais[$key]['total'] = [
+                    'pendentes' => $pendentes,
+                    'aprovado' =>  $aprovado,
+                    'enviado' => $enviado
+                ];
             }
         }
 
@@ -79,9 +82,9 @@ class UsersService
                     "email" => $fiscal['email'],
                     "avatar" => $fiscal['avatar'],
                     "supervisor" => $fiscal['supervisor'],
-                    'pendentes' => $fiscal['pendentes'],
-                    'aprovado' =>  $fiscal['aprovado'],
-                    'enviado' => $fiscal['enviado']
+                    'pendentes' => $fiscal['total']['pendentes'],
+                    'aprovado' =>  $fiscal['total']['aprovado'],
+                    'enviado' => $fiscal['total']['enviado']
                 ];
             }
             return json_encode($return, true);

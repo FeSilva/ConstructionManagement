@@ -30,18 +30,16 @@ class UploadZipController extends Controller
                 $this->logs($file, 'falha', $file);
                 return redirect()->back()->with("error", "Não foi possivel abrir o arquivo");
             }
-
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $archive = $zip->getNameIndex($i);
                 $fileinfo = pathinfo($archive);
                 $file = $zip->getFromName($fileinfo['basename']);
-                $surveys = SurveyServices::getSurveysForFileName($fileinfo['basename']);
-                $filePath = $this->saveFileAndCreateDirectory($fileinfo['filename'], $surveys->user->code_fde, $file);
-                $surveys->update(['archive' => $filePath, 'status' => 'Aprovado']);
+                $surveyServices = new SurveyServices();
+                $surveys = $surveyServices->getSurveysForFileName($fileinfo['basename']);
+                $this->validationZip($surveys, $fileinfo, $file);
             }
-
             DB::commit();
-            return redirect()->back()->with("sucesso", "Upload Realizado com sucesso!");
+            return redirect()->back()->with("success", "Upload Realizado com sucesso!");
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with("error", $e->getMessage());
@@ -49,6 +47,12 @@ class UploadZipController extends Controller
 
     }
   
+    private function validationZip($surveys, $fileinfo, $file) {
+        if ($surveys) {
+            $filePath = $this->saveFileAndCreateDirectory($fileinfo['filename'], $surveys->user['code_fde'], $file);
+            $surveys->update(['archive' => $filePath, 'status' => 'Aprovado']);
+        } 
+    }
     private function saveFileAndCreateDirectory($fileName, $codFde, $file)
     {
         $piCod = preg_replace('/\./', '-', explode('_', $fileName));

@@ -61,7 +61,7 @@
             </div>
           </div>
           <h2 class="fw-bolder mt-1">{{number_format($accomplished,0,",",".")}}</h2>
-          <p class="card-text">Vistorias Realizadas</p>
+          <p class="card-text">Vistorias Em Aprovação</p>
         </div>
         <div id="gained-chart"></div>
       </div>
@@ -78,7 +78,7 @@
             </div>
           </div>
           <h2 class="fw-bolder mt-1">{{number_format($outstanding,0,",",".")}}</h2>
-          <p class="card-text">Vistorias em Aprovação.</p>
+          <p class="card-text">Vistorias em Cadastradas.</p>
         </div>
         <div id="order-chart"></div>
       </div>
