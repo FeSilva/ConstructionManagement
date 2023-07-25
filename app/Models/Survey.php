@@ -136,7 +136,7 @@ class Survey extends Model
      */
     public function building()
     {
-        return $this->hasOne(building::class, 'id', 'building_id');
+        return $this->hasOne(Building::class, 'id', 'building_id');
     }
 
 
