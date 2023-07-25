@@ -80,7 +80,7 @@ Class ShippingListServices {
             return true;
         } catch (\Exception $e) {
             DB::rollback();
-            return throw new \Exception($e->getMessage(), 400);
+            
         }
     }
 
