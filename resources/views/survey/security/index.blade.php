@@ -9,10 +9,15 @@
                 @includeif('partials.errors')
                 <div class="card card-default">
                     <div class="card-body">
+                        @if(!isset($survey))
                         <form method="POST" action="{{route("surveys.opening.store")}}"  role="form" enctype="multipart/form-data">
                             @csrf
                             @include('survey.security.form')
                         </form>
+                        @else
+                            @include('survey.security.edit')
+
+                        @endif
                     </div>
                 </div>
             </div>
@@ -45,7 +50,8 @@
                 success: function (data) {
                     //$('#ultimasVistorias').show();
                     $("#building_code").val(data.building.codigo);
-                    $("#building_id").val(data.building.name);
+                    $("#building_id").val(data.building.id);
+                    $("#building_name").val(data.building.name);
                     $("#diretory").val(data.building.diretoria);
                     $('#assinatura').val(data.signatureDate);
                     $('#valor_total').val(data.total_price);

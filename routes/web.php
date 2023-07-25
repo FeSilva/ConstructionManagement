@@ -15,7 +15,7 @@ use App\Http\Controllers\FileManagerController;
 use App\Http\Controllers\MeansurentController;
 use App\Http\Controllers\ShippingListController;
 use App\Http\Controllers\UploadZipController;
-
+use App\Http\Controllers\ProtocolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,8 +96,8 @@ Route::middleware([
     Route::prefix('/surveys')->group(function () {
         Route::get('/list', [SurveyController::class, 'index'])->name('surveys.list');
         Route::get('/show/{id}', [SurveyController::class, 'show'])->name('surveys.show');
-        Route::get('/edit/{id}', [SurveyController::class, 'edit'])->name('surveys.edit');
-        //Route::post('/store', [SurveyController::class, 'store'])->name('surveys.store');
+        Route::get('/edit/{type_id}/{id}', [SurveyController::class, 'edit'])->name('surveys.edit');
+    
         Route::patch('/update/{surveys_id}', [SurveyController::class, 'update'])->name('surveys.update');
         Route::delete('/destroy/{surveys_id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
         Route::get('/specific', [SurveyController::class, 'specific'])->name('surveys.specific.create');
@@ -131,6 +131,10 @@ Route::middleware([
             Route::post('/store', [SurveyController::class, 'store'])->name('surveys.specific.store');
         });
         
+        Route::prefix('/rip')->group(function () {
+            Route::get('/', [SurveyController::class, 'rip'])->name('surveys.rip.create');
+            Route::post('/store', [SurveyController::class, 'store'])->name('surveys.rip.store');
+        });
         Route::prefix('/security')->group(function () {
             Route::get('/', [SurveyController::class, 'security'])->name('surveys.security.create');
             Route::post('/store', [SurveyController::class, 'store'])->name('surveys.security.store');
@@ -153,9 +157,11 @@ Route::middleware([
     Route::prefix("/shippinglist")->group(function () {
         Route::get("/", [ShippingListController::class,"index"])->name("shippinglist.index");
 
+        Route::get("/send", [ShippingListController::class,"send"])->name("shippinglist.send");
+
+        Route::post("/consultMonth", [ShippingListController::class, 'getMonth'])->name('shippingList.consultMonth');
         //validar uso
-        Route::get("/sendlist", [ShippingListController::class,"index"])->name("shippinglist.send");
-        Route::post('/store', [SurveyController::class, 'store'])->name('listaenvios.consultaMes');
+        Route::post('/store', [ShippingListController::class, 'store'])->name('shippinglist.store');
         Route::post("/getlist", [ShippingListController::class,"getList"])->name("shippinglist.getList");
     });
 
@@ -177,6 +183,12 @@ Route::middleware([
         Route::post('/store', [UserController::class, 'store'])->name('users.store');
     });
 
+    Route::prefix("/protocol")->group(function () {
+        Route::get("/", [ProtocolController::class,'index'])->name("protocol.index");
+        Route::get("/create", [ProtocolController::class,'create'])->name("protocol.create");
+        Route::post("/store", [ProtocolController::class,'store'])->name("protocol.store");
+        Route::get("/edit/{id}", [ProtocolController::class,'edit'])->name("protocol.edit");
+    });
     //Calendar
     Route::prefix('/calendar')->group(function () {
         Route::get('/', [CalendarController::class, 'index'])->name('calendar');

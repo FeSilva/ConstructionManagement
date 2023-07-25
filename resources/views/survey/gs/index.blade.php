@@ -11,11 +11,9 @@
 
                 <div class="card card-default">
                     <div class="card-body">
-                        <form method="POST" action=""  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('surveys.management.store')}}"  role="form" enctype="multipart/form-data">
                             @csrf
-
                             @include('survey.gs.gsForm')
-
                         </form>
                     </div>
                 </div>
@@ -32,7 +30,6 @@
         //MASK
         $('#intervention_code').mask('0000/00000');
         $('#building_code').mask('00.00.000');
-     
         $("#building_code").change(function(){
             $.ajax({
                 headers: {
@@ -49,10 +46,7 @@
                     alert(error);
                 }
             });
-
         });
-
-    
     });
 </script>
 @endpush

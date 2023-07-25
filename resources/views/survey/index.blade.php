@@ -27,34 +27,6 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                        @php /* <tbody class="table-border-bottom-0">
-                                @foreach ($surveys as $survey)
-                                    <tr>
-                                        <td>{{ ++$i }}</td>
-                                        
-                                        <td>{{ $survey->interventionProcess->code }}</td>
-                                        <td>{{ $survey->typesInspection->name ?? null }}</td>
-                                        <td>{{ $survey->progress->name ?? null}}</td>
-                                        <td>{{ $survey->user->name }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($survey->date_close)) }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($survey->inspection_date)) }}</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width:{{ $survey->physical_progress ?? 0 }}%;" aria-valuenow="{{ $survey->physical_progress ?? 0 }}" aria-valuemin="0" aria-valuemax="100" title="{{ $survey->physical_progress ?? 0 }}%">{{ $survey->physical_progress ?? 0 }}%</div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('surveys.destroy',$survey->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary " href="{{ route('surveys.show',$survey->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('surveys.edit',$survey->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>*/@endphp
                         </table>
                     </div>
                 </div>

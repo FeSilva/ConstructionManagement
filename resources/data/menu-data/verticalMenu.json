@@ -5,7 +5,7 @@
         "slug": ""
     },
     {
-      "url": "#",
+      "url": "/",
       "name": "Dashboard",
       "icon": "home",
       "slug": "dashboard"
@@ -125,6 +125,12 @@
         "slug": "layout-full"
     },
     {
+        "url": "/surveys/rip",
+        "name": "Relatório de Inspeção Predial",
+        "icon": "circle",
+        "slug": "layout-full"
+    },
+    {
         "navheader": "Aprovação de Vistorias",
         "slug": ""
     },
@@ -140,10 +146,16 @@
     },
     {
         "url": "/shippinglist",
+        "name": "Vistorias Enviadas",
+        "icon": "book-open",
+        "slug": "shippinglist"
+    },
+    {
+        "url": "/shippinglist/send",
         "badge": "5",
         "name": "Enviar Vistorias",
         "icon": "send",
-        "slug": "shippinglist"
+        "slug": "shippinglist/send"
     },
     {
         "navheader": "Documentos & Relatórios",

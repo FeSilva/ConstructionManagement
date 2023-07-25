@@ -61,6 +61,7 @@ class Survey extends Model
         'progress_id',
         'owner_id',
         'rhythms_id',
+        'building_id',
         'program',
         'intervention_code',
         'building_code',
@@ -124,6 +125,19 @@ class Survey extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'owner_id');
     }
+
+    public function shippingList()
+    {
+       return $this->belongsToMany(ShippingList::class, 'shipping_surveys');
+    }
     
+      /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function building()
+    {
+        return $this->hasOne(building::class, 'id', 'building_id');
+    }
+
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Vistorias Específicas')
+@section('title', 'Relatório de Inspeção Predial')
 @section('content')
     @component('components.messages._messages')@endcomponent
     <section class="container-fluid">
@@ -13,9 +13,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('surveys.specific.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
-
-                            @include('survey.specific.specificForm')
-
+                            @include('survey.rip.ripForm')
                         </form>
                     </div>
                 </div>

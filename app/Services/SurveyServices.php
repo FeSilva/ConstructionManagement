@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Building;
 use App\Models\InterventionProcess;
 use App\Models\TypesInspection;
 use App\Models\SurveyItemProgress;
@@ -25,6 +26,7 @@ Class SurveyServices {
         try {
         $filePath = null;
         $interventionProcess = InterventionProcess::where("code", $request["intervention_code"])->with("building")->with("user")->first();
+        $building = Building::where("codigo", $request['building_code'])->first();
         $inspectionType = TypesInspection::where("name", $request["type_name"])->first();
         switch ($inspectionType->id) {
             case 1: 
@@ -40,13 +42,16 @@ Class SurveyServices {
         $name_archive = '';
         switch ($inspectionType->id){
             case 4:
-                $name_archive = 'OS_'.str_replace(".","",$interventionProcess->building->codigo).'_'.$request["inspection_date"];
+                $name_archive = 'OS_'.str_replace(".","",$building->codigo).'_'.$request["inspection_date"];
                 break;
             case 5:
-                $name_archive = 'OC_'.str_replace(".","",$interventionProcess->building->codigo).'_'.$request["inspection_date"];
+                $name_archive = 'OC_'.str_replace(".","",$building->codigo).'_'.$request["inspection_date"];
                 break;
             case 6:
-                $name_archive = 'RI_'.str_replace(".","",$interventionProcess->building->codigo).'_'.$request["inspection_date"];
+                $name_archive = 'RI_'.str_replace(".","",$building->codigo).'_'.$request["inspection_date"];
+                break;
+            case 9:
+                $name_archive = 'RIP_'.str_replace(".","",$building->codigo).'_'.$request["inspection_date"];
                 break;
             case 7:
                 $name_archive = 'GS_'.str_replace("/",".",$interventionProcess->code).'_'.$request["inspection_date"];
@@ -54,10 +59,13 @@ Class SurveyServices {
             case 8:
                 $name_archive = 'ST_'.str_replace("/",".",$interventionProcess->code).'_'.$request["inspection_date"];
                 if($file){
-                    $pastaName = 'seguranca_trabalho';
-                    Storage::putFileAs('public/archives/'.$pastaName, $file, $name_archive.'.pdf');
-                    $filePath = "archives/{$pastaName}/{$name_archive}.pdf"; //VALIDAR NOME
+                    $pastaName = str_replace("/",".",$interventionProcess->code);
+                    Storage::putFileAs('public/Surveys/'.$pastaName, $file, $name_archive.'.pdf');
+                    $filePath = "Surveys/{$pastaName}/{$name_archive}.pdf"; //VALIDAR NOME
                 }
+                break;
+            default: 
+                $name_archive = "LO_".str_replace("/",".",$interventionProcess->code).'_'.$request["inspection_date"];
                 break;
         }
 
@@ -65,8 +73,9 @@ Class SurveyServices {
             'type_id' => $inspectionType->id,
             'intervention_id'=> $interventionProcess->id,
             "progress_id" => $progress,
-            "owner_id" => $interventionProcess->user->id,
+            "owner_id" => $request['owner_id'] ?? $interventionProcess->user->id,
             "intervention_code" => $request["intervention_code"],
+            'building_id' => $building->id,
             "building_code" => $interventionProcess->building->codigo,
             "arquivo" => $filePath,
             "name_archive" => $name_archive,
@@ -85,10 +94,7 @@ Class SurveyServices {
                 return ["message" => "Já existe uma vistoria de $inspectionType->name para este código, e deve existir apenas uma.", "code" => 400];
             }
         }
-          
-   
         $survey = Survey::create($array); // Create Vistoria;
-
         if($inspectionType->id == 3 || $inspectionType->id == 2) { //Fiscalização
             $items = SurveyItemProgress::where("intervention_id", $interventionProcess->id)->get();
             foreach($items as $item) {
@@ -96,7 +102,6 @@ Class SurveyServices {
                     $itemId = $item->id;
                 }
             }
-
             SurveyItemProgress::create([
                 'pi_id' => $interventionProcess->id,
                 'item_id' => $itemId,
@@ -152,7 +157,6 @@ Class SurveyServices {
 
     public function getSurveysForFileName($fileName) {
         try{
-			//Transformando em um array
 			$piCod = preg_replace('/\./', '-', explode('_', $fileName));
 			$dateCreate = date_create(str_replace("-pdf", "", $piCod[1]));
 			$data = date_format($dateCreate, "Y-m-d");

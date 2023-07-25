@@ -74,7 +74,7 @@
             <div class="col-md-4 mb-2">
                 <div class="form-group">
                     {{ Form::label('Andamento') }}
-                    {{ Form::select('progress_id', [1 => 'normal'], old(''), ['class' => 'form-control' . ($errors->has('progress_id') ? ' is-invalid' : ''), 'placeholder' => 'Em execução']) }}
+                    {{ Form::select('progress_id', $progress, old(''), ['class' => 'form-control' . ($errors->has('progress_id') ? ' is-invalid' : ''), 'placeholder' => 'Selecione um Andamento']) }}
                     {!! $errors->first('progress_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="col-md-4 mb-2">
                 <div class="form-group">
                     {{ Form::label('Ritmo') }}
-                    {{ Form::select('rhythms_id', [1 => 'normal'], old(''), ['class' => 'form-control' . ($errors->has('rhythms_id') ? ' is-invalid' : ''), 'placeholder' => 'Normal']) }}
+                    {{ Form::select('rhythms_id', $rythmos, old(''), ['class' => 'form-control' . ($errors->has('rhythms_id') ? ' is-invalid' : ''), 'placeholder' => 'Selecione um Ritmo']) }}
                     {!! $errors->first('rhythms_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

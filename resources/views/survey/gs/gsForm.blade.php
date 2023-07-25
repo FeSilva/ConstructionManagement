@@ -11,7 +11,7 @@
             <div class="col-md-6 mb-1">
                 <div class="form-group">
                     {{ Form::label('Data Vistoria') }}
-                    {{ Form::date('inspection_date', '', ['class' => 'form-control' . ($errors->has('inspection_date') ? ' is-invalid' : ''), 'placeholder' => 'Inspection Date']) }}
+                    {{ Form::date('inspection_date', $survey->inspection_date, ['class' => 'form-control' . ($errors->has('inspection_date') ? ' is-invalid' : ''), 'placeholder' => 'Inspection Date']) }}
                     {!! $errors->first('inspection_date', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <div class="col-md-6 mb-1">
                 <div class="form-group">
                     {{ Form::label('Fiscal') }}
-                    {{ Form::select('owner_id', $fiscal, old(''),  ['class' => 'form-control' . ($errors->has('owner_id') ? ' is-invalid' : ''), 'placeholder' => 'Selecione','id'=>'owner_id']) }}
+                    {{ Form::select('owner_id', $fiscal, $survey->user->id,  ['class' => 'form-control' . ($errors->has('owner_id') ? ' is-invalid' : ''), 'placeholder' => 'Selecione','id'=>'owner_id']) }}
                     {!! $errors->first('owner_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Código Prédio') }}
-                    {{ Form::text('building_code', '', ['class' => 'form-control' . ($errors->has('building_code') ? ' is-invalid' : ''), 'placeholder' => '','id'=>'building_code']) }}
+                    {{ Form::text('building_code', $survey->building_code, ['class' => 'form-control' . ($errors->has('building_code') ? ' is-invalid' : ''), 'placeholder' => '','id'=>'building_code']) }}
                     {!! $errors->first('building_code', '<div class="invalid-feedback">:message</div>') !!}
                 </div>          
             </div>

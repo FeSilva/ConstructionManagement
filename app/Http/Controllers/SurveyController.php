@@ -9,6 +9,8 @@ use App\Models\Program;
 use Illuminate\Http\Request;
 use App\Services\SurveyServices;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Rhythms;
+use App\Models\SurveysProgress;
 /**
  * Class SurveyController
  * @package App\Http\Controllers
@@ -39,6 +41,8 @@ class SurveyController extends Controller
     public function opening() 
     {
         $survey = new Survey();
+     
+        
         return view("survey.fs.opening", compact('survey'));
     }
 
@@ -49,7 +53,9 @@ class SurveyController extends Controller
     public function oversight() 
     {
         $survey = new Survey();
-        return view("survey.fs.oversight", compact('survey'));
+        $rythmos = Rhythms::pluck("name",'id');
+        $progress = SurveysProgress::pluck("name",'id');
+        return view("survey.fs.oversight", compact('survey','rythmos','progress'));
     }
 
      /**
@@ -59,6 +65,7 @@ class SurveyController extends Controller
     public function transfer() 
     {
         $survey = new Survey();
+        $rythmos = Rhythms::all();
         return view("survey.fs.transfer", compact('survey'));
     }
 
@@ -70,6 +77,16 @@ class SurveyController extends Controller
     {
         $fiscal = $this->fiscal;
         return view("survey.specific.index", compact('fiscal'));
+    }
+
+     /**
+     * Specific Create view
+     * Função responsável por exibir a tela de criação de vistorias específicas
+     */
+    public function rip() 
+    {
+        $fiscal = $this->fiscal;
+        return view("survey.rip.index", compact('fiscal'));
     }
 
 
@@ -161,11 +178,22 @@ class SurveyController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($type_id, $id)
     {
-        $survey = Survey::find($id);
-
-        return view('survey.edit', compact('survey'));
+        $survey = Survey::with("interventionProcess")->with("building")->with("user")->find($id);
+        switch($type_id) {
+            case '7':
+                $fiscal = $this->fiscal;
+                return view("survey.gs.index", compact('survey','fiscal'));
+                break;
+            case '8':
+                $fiscal = $this->fiscal;
+                return view("survey.security.index", compact('survey','fiscal'));
+                break;
+            default:
+                return view('survey.edit', compact('survey'));
+                break;
+        }
     }
 
     /**

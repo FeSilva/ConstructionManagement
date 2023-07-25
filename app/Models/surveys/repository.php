@@ -28,6 +28,7 @@ Class repository extends Survey {
                 'id' => $survey->id,
                 'code' => $survey->interventionProcess->code,
                 'type' => $survey->typesInspection->name,
+                'type_id' => $survey->typesInspection->id,
                 'progressName' => $survey->progress->name ?? null,
                 'owner' => $survey->user->name,
                 'date_final' => date_format(date_create($survey->date_close), 'd/m/Y'),

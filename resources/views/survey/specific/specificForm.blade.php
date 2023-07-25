@@ -30,7 +30,7 @@
             <div class="col-md-4 mb-1">
                 <div class="form-group">
                     {{ Form::label('Código PI') }}
-                    {{ Form::text('intervention_code', '', ['class' => 'form-control' . ($errors->has('intervention_code') ? ' is-invalid' : ''), 'placeholder' => 'Código PI']) }}
+                    {{ Form::text('intervention_code', '', ['class' => 'form-control' . ($errors->has('intervention_code') ? ' is-invalid' : ''), 'placeholder' => 'Código PI', 'id' => 'intervention_code']) }}
                     {!! $errors->first('intervention_code', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>

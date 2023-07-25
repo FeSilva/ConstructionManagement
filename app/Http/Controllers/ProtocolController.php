@@ -2,26 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\UsersService;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Bus\Dispatcher;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Http\Request;
 
-use App\Models\Survey;
-
-class UserController extends Controller
+class ProtocolController extends Controller
 {
-    private $service;
-
-    public function __construct(UsersService $service)
-    {
-        $this->service = $service;
-        $this->service->getUsersJson();
-    }
-
-
-    
     /**
      * Display a listing of the resource.
      *
@@ -29,11 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $breadcrumbs = [
-            ['name' => "Listagem"]
-        ];
         
-        return view('users.index', compact('breadcrumbs'));
+        return view("protocol.index");
     }
 
     /**
@@ -43,7 +25,16 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $tipos = TypesInspection::whereNotIn("id", [1,2])->pluck('name','id');
+        $surveys = Survey::where('status','Aprovado')->get(); //where("status", aprovado)->get();
+        
+        $fiscalization = $surveys->whereIn("type_id", [1,2,3])->count();
+        $securityOfWork = $surveys->where("type_id", 8)->count();
+        $budgetSimple = $surveys->where("type_id", 4)->count();
+        $budgetComplex = $surveys->where("type_id", 5)->count();
+        $specific = $surveys->where("type_id", 6)->count();
+        $management = $surveys->where("type_id", 7)->count();
+        return view("protocol.create");
     }
 
     /**
@@ -65,14 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->service->getUserById($id);
-
-        $aSurveys = Survey::with("typesInspection")->where("owner_id", $id)->get();
-        $accomplished = $aSurveys->whereIn("status",['aprovado','Enviado'])->count();
-        $outstanding = $aSurveys->where("status", 'cadastro')->count();
-        $supervisors = UsersService::supervisor();
-        $surveys = Survey::with("typesInspection")->where("owner_id", $id)->orderBy("inspection_date","desc")->paginate();
-        return view("users.account", compact("user","accomplished","outstanding","surveys","supervisors"));
+        //
     }
 
     /**

@@ -49,19 +49,43 @@ class UploadZipController extends Controller
   
     private function validationZip($surveys, $fileinfo, $file) {
         if ($surveys) {
-            $filePath = $this->saveFileAndCreateDirectory($fileinfo['filename'], $surveys->user['code_fde'], $file);
+            $filePath = $this->saveFileAndCreateDirectory($fileinfo['filename'], $surveys->user['code_fde'], $file, $surveys);
             $surveys->update(['archive' => $filePath, 'status' => 'Aprovado']);
         } 
     }
-    private function saveFileAndCreateDirectory($fileName, $codFde, $file)
+
+    private function saveFileAndCreateDirectory($fileName, $codFde, $file, $survey)
     {
+
+        $name_archive = '';
+
         $piCod = preg_replace('/\./', '-', explode('_', $fileName));
         $dateCreate = date_create($piCod[1]);
         $data = date_format($dateCreate, "d.m.y");
-        $newFileName = substr($fileName, 0, 4) .".".  substr($fileName, 5, 5)."_".$data."_".$codFde;
+
+        switch ($survey->type_id){
+            case 4:
+                $name_archive = 'OS_'.str_replace(".","",$survey->building->codigo).'_'.$data;
+                break;
+            case 5:
+                $name_archive = 'OC_'.str_replace(".","",$survey->building->codigo).'_'.$data;
+                break;
+            case 6:
+                $name_archive = 'RI_'.str_replace(".","",$survey->building->codigo).'_'.$data;
+                break;
+            case 7:
+                $name_archive = 'GS_'.str_replace("/",".",$survey->interventionProcess->code).'_'.$data;
+                break;
+            case 8:
+                return;
+                break;
+            default: 
+                $name_archive = "LO_".str_replace("/",".",$survey->interventionProcess->code).'_'.$data;
+                break;
+        }
         $fileName = substr($fileName, 0, 4) .  substr($fileName, 4, 5);
-        Storage::disk('public')->put("Surveys/{$fileName}/LO_{$newFileName}.pdf", $file);
-        $filePath = "Surveys/{$fileName}/LO_{$newFileName}.pdf"; //VALIDAR NOME;
+        Storage::disk('public')->put("Surveys/{$fileName}/{$name_archive}.pdf", $file);
+        $filePath = "Surveys/{$fileName}/{$name_archive}.pdf"; //VALIDAR NOME;
         return $filePath;
     }
 }

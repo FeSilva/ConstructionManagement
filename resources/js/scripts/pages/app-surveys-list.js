@@ -82,8 +82,7 @@ $(function () {
                         feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
                         '</a>' +
                         '<div class="dropdown-menu dropdown-menu-end">' +
-                        '<a href="' +
-                        assetPath + 'user/view/account/'+ full['id'] +
+                        '<a href="/surveys/edit/'+ full['type_id'] + '/' + full['id'] +
                         '" class="dropdown-item">' +
                         feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
                         'Details</a>' +
