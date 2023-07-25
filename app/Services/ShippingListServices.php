@@ -122,7 +122,7 @@ Class ShippingListServices {
                 $surveysSend)
             );
         } catch (\Exception $e) {
-            return throw new \Exception($e->getMessage(), 400);
+            return new Exception($e->getMessage(), 400);
         }
     }
 }
