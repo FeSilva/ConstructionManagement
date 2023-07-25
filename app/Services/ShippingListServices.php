@@ -87,7 +87,7 @@ Class ShippingListServices {
     private function validateShippingSend($request) {
         $shippingConsult = ShippingList::where('code', $request['code'])->where('month', $request['month'])->first();
         if($shippingConsult){
-            return throw new Exception('A lista de envio '.$request['code'].' do mês de '.$request['month'].'já foi enviada para a FDE, por favor olhe na lista de envio.', 400);
+            return new Exception('A lista de envio '.$request['code'].' do mês de '.$request['month'].'já foi enviada para a FDE, por favor olhe na lista de envio.', 400);
         }
     }
 
