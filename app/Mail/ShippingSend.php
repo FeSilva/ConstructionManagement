@@ -47,15 +47,15 @@ Class ShippingSend extends Mailable {
         $surveySend = $this->surveySend;
         $codeSplit = explode('/',$this->code);
         $seq = $codeSplit[0];
-        $surveys = Survey::whereIn('id', $this->surveys_id)->get();
+        $surveys = Survey::with('typesInspection')->whereIn('id', $this->surveys_id)->get();
 
         $email = $this
         ->from('lo@cespfde.com.br')
         ->subject('Vistorias de '.$surveys->typesInspection->name.' '.$month.'-'.$seq)
         ->to('felipe__silva@outlook.com')//Trocar email para um padrão
-        ->Bcc('maria.santos@cespfde.com.br')
+        //->Bcc('maria.santos@cespfde.com.br')
         //->Bcc('cassio.fonseca@cespfde.com.br')
-        ->Bcc('luiz.junior@cespfde.com.br')
+        //->Bcc('luiz.junior@cespfde.com.br')
         ->view('email.layout' , compact('query', 'seq', 'surveySend'));
         foreach ($surveys as $survey) {
             $email->attach(storage_path("app/public/".$survey->archive));//colocar concatenação para storage apos excluir testes do BD
