@@ -51,7 +51,7 @@ Class ShippingSend extends Mailable {
 
         $email = $this
         ->from('lo@cespfde.com.br')
-        ->subject('Vistorias de '.$surveys->typesInspection->name.' '.$month.'-'.$seq)
+        ->subject('Vistorias de Fiscalização '.$month.'-'.$seq)
         ->to('felipe__silva@outlook.com')//Trocar email para um padrão
         //->Bcc('maria.santos@cespfde.com.br')
         //->Bcc('cassio.fonseca@cespfde.com.br')
