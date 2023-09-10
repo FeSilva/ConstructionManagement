@@ -66,7 +66,8 @@ class SurveyController extends Controller
     {
         $survey = new Survey();
         $rythmos = Rhythms::all();
-        return view("survey.fs.transfer", compact('survey'));
+        $progress = SurveysProgress::pluck("name",'id');
+        return view("survey.fs.transfer", compact('survey', 'rythmos', 'progress'));
     }
 
      /**

@@ -39,6 +39,33 @@
         $('#valor_total').mask('#.##0,00', {
             reverse: true
         });*/
+        $('#intervention_code').mask('0000/00000');
+        $('#building_code').mask('00.00.000');
+     
+        $("#building_code").change(function(){
+            $.ajax({
+                headers: {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
+                },
+                type: 'POST',
+                url: "{{ route('getBuilding')}}",
+                data: 'code='+ $(this).val(),
+                success: function (data) {
+                    if(data.diretoria) {
+                        $("#diretory").val(data.diretoria);
+                        $("#building_id").val(data.name);
+                    } else { 
+                        $("#building_code").focus().val('');
+                        alert("Predio não encontrado");
+                    }
+                },
+                error: function(error){
+          
+                }
+            });
+
+        });
+        
         $("#intervention_code").change(function () {
             $.ajax({
                 headers: {

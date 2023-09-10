@@ -35,7 +35,6 @@ Class ShippingSend extends Mailable {
         try {
             $date = date("F", mktime(0, 0, 0, $this->month, 10));
             $month = ucfirst( utf8_encode( strftime("%B", strtotime($date))));
-
             return $this->layout($month);
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());

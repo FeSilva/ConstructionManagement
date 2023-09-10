@@ -13,7 +13,11 @@
                     <div class="card-body">
                         <form method="POST" action="{{route('surveys.management.store')}}"  role="form" enctype="multipart/form-data">
                             @csrf
-                            @include('survey.gs.gsForm')
+                            @if(!isset($survey))
+                                @include('survey.gs.gsForm')
+                            @else
+                                @include('survey.gs.edit')
+                            @endif
                         </form>
                     </div>
                 </div>
