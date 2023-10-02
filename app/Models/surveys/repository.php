@@ -26,7 +26,7 @@ Class repository extends Survey {
         foreach ($surveys as $survey) {
             $infoList['data'][] = [
                 'id' => $survey->id,
-                'code' => $survey->interventionProcess->code,
+                'code' => $survey->interventionProcess->code ?? null,
                 'type' => $survey->typesInspection->name,
                 'type_id' => $survey->typesInspection->id,
                 'progressName' => $survey->progress->name ?? null,
