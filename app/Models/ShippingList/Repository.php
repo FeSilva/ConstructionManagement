@@ -8,6 +8,7 @@ Class Repository {
 
     public function getShippingList() {
         $shippingList = ShippingList::with('users')->with("typeInspection")->with("surveys")->get();
+        $json = [];
         foreach ($shippingList as $list) {
             setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             $date = date("F", mktime(0, 0, 0, $list->month, 10));
